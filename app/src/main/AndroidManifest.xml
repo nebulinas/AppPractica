@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppPractica">
         <activity
+            android:name=".HistorialActivosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InventarioCamarasActivity"
+            android:exported="false" />
+        <activity
             android:name=".InventarioComputadorasActivity"
             android:exported="false" />
         <activity

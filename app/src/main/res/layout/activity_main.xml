@@ -49,8 +49,8 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Computadoras"
-            android:textAlignment="center"/>
+            android:text="Menu Computadoras"
+            android:textAlignment="center" />
 
         <Space
             android:layout_width="match_parent"
@@ -88,6 +88,7 @@
             android:layout_height="wrap_content"
             android:text="Historial"
             android:textAlignment="center"/>
+
     </RadioGroup>
 
 </LinearLayout>
