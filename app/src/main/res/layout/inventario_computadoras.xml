@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="#3F51B5"
+        android:text="TextView"
+        android:textColor="#3F51B5" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:text="Inventario Activos de Computadoras"
+        android:textAlignment="center"
+        android:textColor="#3F51B5"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <EditText
+                android:id="@+id/nombre_equipo"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Nombre del Equipo" />
+
+            <EditText
+                android:id="@+id/nombre_encargado"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Encargado" />
+
+            <EditText
+                android:id="@+id/version_windows"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Version de Windows" />
+
+            <EditText
+                android:id="@+id/memoria_ram"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Tamaño Memoria Ram" />
+
+            <EditText
+                android:id="@+id/ver_antivirus"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Version de Antivirus" />
+
+            <EditText
+                android:id="@+id/direccion_ip"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Direccion IP" />
+
+            <EditText
+                android:id="@+id/no_activo"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Numero de Activo" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="29dp" />
+
+            <Button
+                android:id="@+id/boton_guardar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#3F51B5"
+                android:text="Guardar" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="41dp" />
+
+            <ImageView
+                android:id="@+id/button4"
+                android:layout_width="43dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:background="@drawable/terurn1" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
