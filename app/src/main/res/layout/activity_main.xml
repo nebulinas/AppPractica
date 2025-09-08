@@ -8,87 +8,160 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView4"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="#3F51B5"
-        android:text="TextView"
-        android:textColor="#3F51B5" />
+        android:layout_height="?attr/actionBarSize"
+        app:title="control de activos"
+        android:backgroundTint="#3F51B5"/>
+
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="14dp" />
+        android:layout_height="24dp" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:text="Informacion Tecnica de Mantenimiento y Activos"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="Información Técnica de Mantenimiento y Activos"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="?android:attr/textColorPrimary"
         android:fontFamily="@font/monserrat"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
+
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="76dp" />
+        android:layout_height="48dp" />
 
-    <RadioGroup
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
-        <ImageView
-            android:id="@+id/activos_computadoras"
-            android:layout_width="92dp"
-            android:layout_height="82dp"
-            android:layout_gravity="center"
-            android:background="@drawable/computadora1" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_activos_computadoras"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Menu Computadoras"
-            android:textAlignment="center" />
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="126dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/activos_computadoras"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/computadora1"
+                    android:contentDescription="Menú Computadoras"/>
+
+                <TextView
+                    android:id="@+id/textView_computadoras"
+                    android:layout_width="120dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="9dp"
+                    android:text="Computadoras"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="24dp" />
 
-        <ImageView
-            android:id="@+id/activos_camaras"
-            android:layout_width="92dp"
-            android:layout_height="82dp"
-            android:layout_gravity="center"
-            android:background="@drawable/camara" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_activos_camaras"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Camaras"
-            android:textAlignment="center"/>
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/activos_camaras"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/camara"
+                    android:contentDescription="Menú Cámaras"/>
+
+                <TextView
+                    android:id="@+id/textView_camaras"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Cámaras"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="24dp" />
 
-        <ImageView
-            android:id="@+id/historial_mantenimiento"
-            android:layout_width="92dp"
-            android:layout_height="82dp"
-            android:layout_gravity="center"
-            android:background="@drawable/historial3"
-            android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_historial_mantenimiento"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Historial"
-            android:textAlignment="center"/>
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            android:clickable="true"
+            android:focusable="true">
 
-    </RadioGroup>
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/historial_mantenimiento"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/historial3"
+                    android:contentDescription="Historial de Mantenimiento"/>
+
+                <TextView
+                    android:id="@+id/textView_historial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Historial"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
 
 </LinearLayout>
