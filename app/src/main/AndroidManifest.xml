@@ -12,10 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppPractica">
         <activity
+            android:name=".EditarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EliminarActivity"
+            android:exported="false" />
+        <activity
             android:name=".HistorialActivosActivity"
             android:exported="false" />
         <activity
             android:name=".InventarioCamarasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuComputadoraActivity"
             android:exported="false" />
         <activity
             android:name=".InventarioComputadorasActivity"
