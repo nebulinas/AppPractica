@@ -264,7 +264,7 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_warning"
+                            android:src="@drawable/ic_advertencia"
                             android:layout_marginEnd="12dp"
                             app:tint="#D32F2F"/>
 
@@ -297,7 +297,7 @@
                         android:text="Cancelar"
                         android:textColor="#666666"
                         app:strokeColor="#666666"
-                        app:icon="@drawable/ic_cancel"
+                        app:icon="@drawable/ic_cancelar"
                         app:iconGravity="textStart"/>
 
                     <!-- Botón Eliminar -->
@@ -310,7 +310,7 @@
                         android:layout_marginStart="8dp"
                         android:text="Eliminar"
                         android:backgroundTint="#D32F2F"
-                        app:icon="@drawable/ic_delete"
+                        app:icon="@drawable/ic_eliminar"
                         app:iconGravity="textStart"/>
                 </LinearLayout>
 
