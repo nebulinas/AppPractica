@@ -191,7 +191,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="Guardar"
                     android:backgroundTint="#3F51B5"
-                    app:icon="@drawable/guardar"
+                    app:icon="@drawable/ic_guardar"
                     app:iconGravity="textStart"
                     android:layout_marginBottom="24dp"/>
 

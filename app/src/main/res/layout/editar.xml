@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:openDrawer="start">
 
-    <!-- Contenido principal de tu pantalla -->
+    <!-- Contenido principal de la pantalla -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -90,14 +90,13 @@
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="33dp"
+                            android:layout_marginBottom="12dp"
+                            android:drawablePadding="8dp"
+                            android:gravity="center"
                             android:text="Buscar Equipo a Editar"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                            android:textColor="#FF9800"
-                            android:layout_marginBottom="12dp"
-                            android:drawableStart="@drawable/ic_search"
-                            android:drawablePadding="8dp"
-                            android:gravity="center_vertical"/>
+                            android:textColor="#FF9800" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/layout_buscar_equipo"
@@ -119,11 +118,11 @@
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="end"
+                            android:layout_gravity="center"
                             android:text="Buscar"
                             android:textColor="#FF9800"
                             app:strokeColor="#FF9800"
-                            app:icon="@drawable/ic_search"
+                            app:icon="@drawable/buscar"
                             app:iconGravity="textStart"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -200,7 +199,7 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textColor="#FF9800"
                     android:layout_marginBottom="12dp"
-                    android:drawableStart="@drawable/ic_settings"
+                    android:drawableStart="@drawable/ic_tecnicas"
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"/>
 
@@ -242,7 +241,7 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textColor="#FF9800"
                     android:layout_marginBottom="12dp"
-                    android:drawableStart="@drawable/ic_security"
+                    android:drawableStart="@drawable/ic_seguridad"
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"/>
 
@@ -296,7 +295,7 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_info"
+                            android:src="@drawable/guardar"
                             android:layout_marginEnd="12dp"
                             app:tint="#4CAF50"/>
 
@@ -344,7 +343,7 @@
                         android:text="Cancelar"
                         android:textColor="#666666"
                         app:strokeColor="#666666"
-                        app:icon="@drawable/ic_cancel"
+                        app:icon="@drawable/ic_cancelar"
                         app:iconGravity="textStart"/>
 
                     <!-- Botón Guardar Cambios -->
@@ -357,7 +356,7 @@
                         android:layout_marginStart="8dp"
                         android:text="Guardar Cambios"
                         android:backgroundTint="#FF9800"
-                        app:icon="@drawable/ic_save"
+                        app:icon="@drawable/ic_guardar"
                         app:iconGravity="textStart"/>
                 </LinearLayout>
 

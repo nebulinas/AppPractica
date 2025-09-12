@@ -115,6 +115,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Información del Equipo a Eliminar"
+                    android:drawableStart="@drawable/ic_computer2"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textColor="#666666"
                     android:layout_marginBottom="16dp"/>
