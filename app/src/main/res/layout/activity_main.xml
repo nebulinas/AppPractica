@@ -49,28 +49,28 @@
 
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_activos_computadoras"
+            android:id="@+id/btn_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
             android:layout_marginBottom="8dp"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="126dp"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:padding="16dp"
-                android:gravity="center_horizontal">
+                android:padding="16dp">
 
                 <ImageView
                     android:id="@+id/activos_computadoras"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/computadora1"
-                    android:contentDescription="Menú Computadoras"/>
+                    android:contentDescription="Menú Computadoras"
+                    android:src="@drawable/computadora1" />
 
                 <TextView
                     android:id="@+id/textView_computadoras"
