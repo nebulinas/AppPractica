@@ -13,21 +13,21 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE inventarioActivos (" +
-                "id INTEGER PRIMARY KEY,"+
-                "agencia text," +
-                "equipo text, " +
-                "encargado text, " +
-                "windows text, " +
-                "ram text, " +
-                "antivirus text ," +
-                "ip integer, "+
-                "activo varchar(20)" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "agencia TEXT," +
+                "equipo TEXT, " +
+                "encargado TEXT, " +
+                "windows TEXT, " +
+                "ram TEXT, " +
+                "antivirus TEXT ," +
+                "ip TEXT, "+
+                "activo VARCHAR(20)" +
                 ")");
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS inventarioActivos");
+        onCreate(db);
     }
 }

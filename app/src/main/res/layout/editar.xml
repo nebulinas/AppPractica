@@ -1,368 +1,368 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:openDrawer="start">
-
-    <!-- Contenido principal de la pantalla -->
-    <LinearLayout
+    <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        tools:openDrawer="start">
 
-        <!-- Toolbar -->
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:title="Editar Inventario"
-                android:backgroundTint="#FF9800"/>
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <!-- Contenedor del Botón de Regreso -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_boton_regresar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="4dp"
-            android:clickable="true"
-            android:focusable="true">
-
-            <ImageView
-                android:id="@+id/boton_regresar"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:padding="10dp"
-                android:src="@drawable/terurn2"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Regresar" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Editar Activo de Computadora"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textColor="#FF9800"
-            android:paddingTop="8dp"
-            android:paddingBottom="16dp"/>
-
-        <ScrollView
+        <!-- Contenido principal de la pantalla -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
+            android:orientation="vertical">
 
-            <LinearLayout
+            <!-- Toolbar -->
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/topAppBar"
+                    style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:title="Editar Inventario"
+                    android:backgroundTint="#FF9800"/>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <!-- Contenedor del Botón de Regreso -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_boton_regresar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:id="@+id/boton_regresar"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="10dp"
+                    android:src="@drawable/terurn2"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Regresar" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="16dp">
+                android:text="Editar Activo de Computadora"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textColor="#FF9800"
+                android:paddingTop="8dp"
+                android:paddingBottom="16dp"/>
 
-                <!-- Sección de búsqueda -->
-                <com.google.android.material.card.MaterialCardView
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    app:cardBackgroundColor="#FFF3E0"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="2dp">
+                    android:orientation="vertical"
+                    android:paddingBottom="16dp">
 
-                    <LinearLayout
+                    <!-- Sección de búsqueda -->
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+                        android:layout_marginBottom="24dp"
+                        app:cardBackgroundColor="#FFF3E0"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="33dp"
-                            android:layout_marginBottom="12dp"
-                            android:drawablePadding="8dp"
-                            android:gravity="center"
-                            android:text="Buscar Equipo a Editar"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                            android:textColor="#FF9800" />
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/layout_buscar_equipo"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            android:hint="Nombre del Equipo o Número de Activo">
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/buscar_equipo"
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="33dp"
+                                android:layout_marginBottom="12dp"
+                                android:drawablePadding="8dp"
+                                android:gravity="center"
+                                android:text="Buscar Equipo a Editar"
+                                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                                android:textColor="#FF9800" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/layout_buscar_equipo"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"/>
-                        </com.google.android.material.textfield.TextInputLayout>
+                                android:layout_marginBottom="12dp"
+                                android:hint="Nombre del Equipo o Número de Activo">
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/boton_buscar"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="wrap_content"
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/buscar_equipo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="text"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/boton_buscar"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Buscar"
+                                android:textColor="#FF9800"
+                                app:strokeColor="#FF9800"
+                                app:icon="@drawable/buscar"
+                                app:iconGravity="textStart"/>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Información básica -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Información Básica"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                        android:textColor="#FF9800"
+                        android:layout_marginBottom="12dp"
+                        android:drawableStart="@drawable/ic_computer"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_nombre_equipo"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:hint="Nombre del Equipo *"
+                        app:helperText="Requerido">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/nombre_equipo"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Buscar"
-                            android:textColor="#FF9800"
-                            app:strokeColor="#FF9800"
-                            app:icon="@drawable/buscar"
-                            app:iconGravity="textStart"/>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                            android:inputType="textCapWords"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Información básica -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Información Básica"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:textColor="#FF9800"
-                    android:layout_marginBottom="12dp"
-                    android:drawableStart="@drawable/ic_computer"
-                    android:drawablePadding="8dp"
-                    android:gravity="center_vertical"/>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_nombre_equipo"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:hint="Nombre del Equipo *"
-                    app:helperText="Requerido">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/nombre_equipo"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_encargado"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textCapWords"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginBottom="12dp"
+                        android:hint="Encargado *"
+                        app:helperText="Requerido">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_encargado"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:hint="Encargado *"
-                    app:helperText="Requerido">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/encargado"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/encargado"
+                    <!-- Número de activo (solo lectura para edición) -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_numero_activo"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginBottom="24dp"
+                        android:hint="Número de Activo"
+                        app:helperText="No se puede modificar">
 
-                <!-- Número de activo (solo lectura para edición) -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_numero_activo"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    android:hint="Número de Activo"
-                    app:helperText="No se puede modificar">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/numero_activo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:clickable="false"
+                            android:textColor="#666666"
+                            android:inputType="none"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/numero_activo"
+                    <!-- Especificaciones técnicas -->
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:clickable="false"
-                        android:textColor="#666666"
-                        android:inputType="none"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:text="Especificaciones Técnicas"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                        android:textColor="#FF9800"
+                        android:layout_marginBottom="12dp"
+                        android:drawableStart="@drawable/ic_tecnicas"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"/>
 
-                <!-- Especificaciones técnicas -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Especificaciones Técnicas"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:textColor="#FF9800"
-                    android:layout_marginBottom="12dp"
-                    android:drawableStart="@drawable/ic_tecnicas"
-                    android:drawablePadding="8dp"
-                    android:gravity="center_vertical"/>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_version_windows"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:hint="Versión de Windows">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/version_windows"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_version_windows"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginBottom="12dp"
+                        android:hint="Versión de Windows">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_memoria_ram"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:hint="Memoria RAM">
+                        <AutoCompleteTextView
+                            android:id="@+id/version_windows"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <AutoCompleteTextView
-                        android:id="@+id/memoria_ram"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_memoria_ram"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginBottom="12dp"
+                        android:hint="Memoria RAM">
 
-                <!-- Seguridad y Red -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Seguridad y Red"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:textColor="#FF9800"
-                    android:layout_marginBottom="12dp"
-                    android:drawableStart="@drawable/ic_seguridad"
-                    android:drawablePadding="8dp"
-                    android:gravity="center_vertical"/>
+                        <AutoCompleteTextView
+                            android:id="@+id/memoria_ram"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_version_antivirus"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:hint="Versión de Antivirus">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/version_antivirus"
+                    <!-- Seguridad y Red -->
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:text="Seguridad y Red"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                        android:textColor="#FF9800"
+                        android:layout_marginBottom="12dp"
+                        android:drawableStart="@drawable/ic_seguridad"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"/>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_direccion_ip"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:hint="Dirección IP"
-                    app:helperText="Formato: 192.168.1.100">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/direccion_ip"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_version_antivirus"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textUri"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginBottom="12dp"
+                        android:hint="Versión de Antivirus">
 
-                <!-- Información de modificación -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    app:cardBackgroundColor="#E8F5E8"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="2dp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/version_antivirus"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_direccion_ip"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="Dirección IP"
+                        app:helperText="Formato: 192.168.1.100">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/direccion_ip"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textUri"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Información de modificación -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        app:cardBackgroundColor="#E8F5E8"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="16dp"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/guardar"
+                                android:layout_marginEnd="12dp"
+                                app:tint="#4CAF50"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/texto_ultima_modificacion"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Último cambio: --/--/---- --:--"
+                                    android:textColor="#4CAF50"
+                                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"/>
+
+                                <TextView
+                                    android:id="@+id/texto_modificado_por"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Modificado por: ---"
+                                    android:textColor="#666666"
+                                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Botones de acción -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="16dp"
-                        android:gravity="center_vertical">
+                        android:gravity="center"
+                        android:layout_marginBottom="24dp">
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/guardar"
-                            android:layout_marginEnd="12dp"
-                            app:tint="#4CAF50"/>
-
-                        <LinearLayout
+                        <!-- Botón Cancelar -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/boton_cancelar"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:layout_marginEnd="8dp"
+                            android:text="Cancelar"
+                            android:textColor="#666666"
+                            app:strokeColor="#666666"
+                            app:icon="@drawable/ic_cancelar"
+                            app:iconGravity="textStart"/>
 
-                            <TextView
-                                android:id="@+id/texto_ultima_modificacion"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Último cambio: --/--/---- --:--"
-                                android:textColor="#4CAF50"
-                                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"/>
-
-                            <TextView
-                                android:id="@+id/texto_modificado_por"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Modificado por: ---"
-                                android:textColor="#666666"
-                                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
-                        </LinearLayout>
+                        <!-- Botón Guardar Cambios -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/boton_guardar"
+                            style="@style/Widget.MaterialComponents.Button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="Guardar Cambios"
+                            android:backgroundTint="#FF9800"
+                            app:icon="@drawable/ic_guardar"
+                            app:iconGravity="textStart"/>
                     </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
 
-                <!-- Botones de acción -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginBottom="24dp">
-
-                    <!-- Botón Cancelar -->
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/boton_cancelar"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="8dp"
-                        android:text="Cancelar"
-                        android:textColor="#666666"
-                        app:strokeColor="#666666"
-                        app:icon="@drawable/ic_cancelar"
-                        app:iconGravity="textStart"/>
-
-                    <!-- Botón Guardar Cambios -->
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/boton_guardar_cambios"
-                        style="@style/Widget.MaterialComponents.Button"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="8dp"
-                        android:text="Guardar Cambios"
-                        android:backgroundTint="#FF9800"
-                        app:icon="@drawable/ic_guardar"
-                        app:iconGravity="textStart"/>
                 </LinearLayout>
+            </ScrollView>
 
-            </LinearLayout>
-        </ScrollView>
-
-    </LinearLayout>
+        </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -14,6 +14,7 @@
         <activity
             android:name=".EditarActivity"
             android:exported="false" />
+
         <activity
             android:name=".EliminarActivity"
             android:exported="false" />
