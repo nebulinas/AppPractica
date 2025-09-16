@@ -71,44 +71,88 @@
             android:paddingEnd="16dp">
 
             <LinearLayout
+                android:id="@+id/layout_inventario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="16dp">
 
                 <!-- Estilo para los TextInputLayout (OutlinedBox) -->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:drawableStart="@drawable/ic_computer2"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="Informacion Basica"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    android:textColor="#3F51B5" />
+
+
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_camara_alta"
+                    android:id="@+id/layout_agencia"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
-                    android:hint="Nombre del Equipo">
+                    android:hint="Agencia*"
+                    app:helperText="Obligatorio">
+                    ">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/camara_alta"
+                        android:id="@+id/nombre_agencia"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textCapWords"/>
+                        android:inputType="textCapWords" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_camara_baja"
+                    android:id="@+id/layout_equipo"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
-                    android:hint="Encargado">
+                    android:hint="Nombre del Equipo*"
+                    app:helperText="Requerido">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/camara_baja"
+                        android:id="@+id/nombre_equipo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName"/>
+                        android:inputType="textCapWords" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_area_camara"
+                    android:id="@+id/layout_encargado"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:hint="Encargado*"
+                    app:helperText="Requerido">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nombre_encargado"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:drawableStart="@drawable/ic_tecnicas"
+                    android:text="Información Técnica"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    android:textColor="#3F51B5" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_windows"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -116,44 +160,44 @@
                     android:hint="Versión de Windows">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/area_camara"
+                        android:id="@+id/version_windows"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"/>
+                        android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_memoria_ram"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:id="@+id/layout_ram"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:hint="Tamaño Memoria RAM (ej: 8GB)">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <AutoCompleteTextView
                         android:id="@+id/memoria_ram"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"/>
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_ver_antivirus"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:id="@+id/layout_antivirus"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:hint="Versión de Antivirus">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/ver_antivirus"
+                    <AutoCompleteTextView
+                        android:id="@+id/version_antivirus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"/>
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_direccion_ip"
+                    android:id="@+id/layout_ip"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -164,11 +208,11 @@
                         android:id="@+id/direccion_ip"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textUri"/>
+                        android:inputType="textUri" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_no_activo"
+                    android:id="@+id/layout_activo"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -179,7 +223,7 @@
                         android:id="@+id/no_activo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textCapCharacters"/>
+                        android:inputType="textCapCharacters" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Botón de Guardar (usando MaterialButton para consistencia) -->
@@ -189,11 +233,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Guardar"
+                    android:layout_marginBottom="24dp"
                     android:backgroundTint="#3F51B5"
+                    android:text="Guardar"
                     app:icon="@drawable/ic_guardar"
-                    app:iconGravity="textStart"
-                    android:layout_marginBottom="24dp"/>
+                    app:iconGravity="textStart" />
 
             </LinearLayout>
         </ScrollView>
