@@ -26,7 +26,7 @@ public class MenuComputadoraActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Inicializar los botones (ImageView)
+        // Inicializar los botones en este caso ImageView
         inicializarBotones();
 
         // Configurar los listeners
@@ -35,10 +35,10 @@ public class MenuComputadoraActivity extends AppCompatActivity {
 
     private void inicializarBotones() {
         // Aquí debes poner los IDs correctos de tus ImageView del archivo XML
-        btnEditar = findViewById(R.id.btn_editar); // Cambia por el ID real
-        btnRegistrar = findViewById(R.id.btn_registrar); // Cambia por el ID real
-        btnEliminar = findViewById(R.id.btn_eliminar); // Cambia por el ID real
-        btnRegresar = findViewById(R.id.boton_regresar); // Cambia por el ID real
+        btnEditar = findViewById(R.id.btn_editar); // botón editar
+        btnRegistrar = findViewById(R.id.btn_registrar); // botón guardar
+        btnEliminar = findViewById(R.id.btn_eliminar); // botón eliminar
+        btnRegresar = findViewById(R.id.boton_regresar); // botón regresar
     }
 
     private void configurarListeners() {
@@ -75,7 +75,7 @@ public class MenuComputadoraActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MenuComputadoraActivity.this, MainActivity.class);
                 startActivity(intent);
-                // Opcional: cerrar esta actividad
+                // Cierra este activity
                 finish();
             }
         });

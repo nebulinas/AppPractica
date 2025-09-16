@@ -103,12 +103,16 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="25dp" />
-            <ImageView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/boton_regresar"
-                android:layout_width="43dp"
-                android:layout_height="38dp"
-                android:layout_gravity="center"
-                android:background="@drawable/terurn1" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="#3F51B5"
+                android:text="Regresar"
+                app:icon="@drawable/terurn2"
+                app:iconGravity="textStart"/>
 
         </LinearLayout>
     </ScrollView>
