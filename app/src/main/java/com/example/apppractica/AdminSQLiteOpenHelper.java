@@ -12,7 +12,17 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table inventario (id integer primary key, agencia text, equipo text, encargado text, windows text, ram text, antivirus text, ip text, activo text)");
+        db.execSQL("CREATE TABLE inventarioActivos (" +
+                "id INTEGER PRIMARY KEY,"+
+                "agencia text," +
+                "equipo text, " +
+                "encargado text, " +
+                "windows text, " +
+                "ram text, " +
+                "antivirus text ," +
+                "ip integer, "+
+                "activo varchar(20)" +
+                ")");
 
     }
 
