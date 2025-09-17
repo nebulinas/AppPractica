@@ -45,23 +45,6 @@
             android:orientation="vertical" >
 
 
-            <ImageView
-                android:id="@+id/btn_editar"
-                android:layout_width="93dp"
-                android:layout_height="90dp"
-                android:layout_gravity="center"
-                android:background="@drawable/editable" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-
-            <TextView
-                android:id="@+id/Editar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Editar"
-                android:textAlignment="center" />
 
             <Space
             android:layout_width="match_parent"
@@ -88,6 +71,29 @@
             <Space
             android:layout_width="match_parent"
             android:layout_height="25dp" />
+            <ImageView
+                android:id="@+id/btn_editar"
+                android:layout_width="93dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center"
+                android:background="@drawable/editable" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <TextView
+                android:id="@+id/Editar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Editar"
+                android:textAlignment="center" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+
 
 
             <ImageView
