@@ -19,6 +19,8 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
     private Spinner spMemoriaRam, spVersionAntivirus;
     private LinearLayout layout_inventario;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
