@@ -1,6 +1,4 @@
 package com.example.apppractica;
-import static android.app.ProgressDialog.show;
-
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -21,10 +19,10 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class InventarioComputadorasActivity extends AppCompatActivity {
 
-    private static final String DATABASE_NAME = "inventario_computadoras.db";
+    private static final String DATABASE_NAME = "inventarioActivos.db";
     private static final int DATABASE_VERSION = 1;
 
-    private static final String TABLE_INVENTARIO = "inventario";
+    private static final String TABLE_INVENTARIO= "inventarioActivos";
     public static final String COLUMN_AGENCIA = "agencia";
     public static final String COLUMN_EQUIPO = "equipo";
     public static final String COLUMN_ENCARGADO = "encargado";
@@ -36,8 +34,8 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
 
 
     private TextInputEditText etNombreAgencia, etNombreEquipo, etNombreEncargado,  etDireccionIp, etNoActivo;
-    private AutoCompleteTextView  MemoriaRam, VersionWindows, VersionAntivirus;
-    private MaterialButton BotonGuardar;
+    private AutoCompleteTextView  acMemoriaRam, acVersionWindows, acVersionAntivirus;
+    private MaterialButton btnGuardar;
     private MaterialCardView cardBotonRegresar;
 
     private AdminSQLiteOpenHelper adminSQLiteOpenHelper;
@@ -58,38 +56,42 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
 
 
         adminSQLiteOpenHelper = new AdminSQLiteOpenHelper(this, DATABASE_NAME, null, DATABASE_VERSION);
+
+
         etNombreAgencia = findViewById(R.id.nombre_agencia);
         etNombreEquipo = findViewById(R.id.nombre_equipo);
         etNombreEncargado = findViewById(R.id.nombre_encargado);
-        VersionWindows = findViewById(R.id.version_windows);
-        MemoriaRam = findViewById(R.id.memoria_ram);
-        VersionAntivirus = findViewById(R.id.version_antivirus);
+        acVersionWindows = findViewById(R.id.version_windows);
+
+        acMemoriaRam = findViewById(R.id.memoria_ram);
+        acVersionAntivirus = findViewById(R.id.version_antivirus);
+
         etDireccionIp = findViewById(R.id.direccion_ip);
         etNoActivo = findViewById(R.id.no_activo);
-        BotonGuardar = findViewById(R.id.boton_guardar);
+        btnGuardar = findViewById(R.id.boton_guardar);
         cardBotonRegresar = findViewById(R.id.card_boton_regresar);
 
 
         String[] opcionesRam ={"2 GB", "4 GB", "8 GB", "16 GB", "32 GB", "64 GB" };
         ArrayAdapter<String> adapterRam = new ArrayAdapter<>
                 (this, android.R.layout.simple_dropdown_item_1line, opcionesRam);
-        MemoriaRam.setAdapter(adapterRam);
+        acMemoriaRam.setAdapter(adapterRam);
 
         String[] versionesWindows = {"Windows 10 Pro", "Windows 11 Pro", "Windows 10 Home", "Windows 11 Home" };
         ArrayAdapter<String> adapterWindows = new ArrayAdapter<>
                 (this, android.R.layout.simple_dropdown_item_1line, versionesWindows);
-        VersionWindows.setAdapter(adapterWindows);
+        acVersionWindows.setAdapter(adapterWindows);
 
         String[] versionAntivirus = {"Eset 12.0", "Eset 10.0"};
         ArrayAdapter<String> adapterAntivirus = new ArrayAdapter<>
                 (this, android.R.layout.simple_dropdown_item_1line, versionAntivirus);
-        VersionAntivirus.setAdapter(adapterAntivirus);
+        acVersionAntivirus.setAdapter(adapterAntivirus);
 
 
-        BotonGuardar.setOnClickListener(new View.OnClickListener() {
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                capturaryGuardarDatos();
+                capturarYGuardarDatos();
             }
         });
 
@@ -106,13 +108,13 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
         }
     }
 
-    private void capturaryGuardarDatos() {
+    private void capturarYGuardarDatos() {
         String agencia = etNombreAgencia.getText().toString().trim();
         String equipo = etNombreEquipo.getText().toString().trim();
         String encargado = etNombreEncargado.getText().toString().trim();
-        String windows = VersionWindows.getText().toString().trim();
-        String ram = MemoriaRam.getText().toString().trim();
-        String antivirus = VersionAntivirus.getText().toString().trim();
+        String windows = acVersionWindows.getText().toString().trim();
+        String ram = acMemoriaRam.getText().toString().trim();
+        String antivirus = acVersionAntivirus.getText().toString().trim();
         String ip = etDireccionIp.getText().toString().trim();
         String activo = etNoActivo.getText().toString().trim();
 
@@ -121,11 +123,16 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
             etNombreAgencia.setError("Este campo es requerido");
             etNombreAgencia.requestFocus();
             return;
+            } else {
+            etNombreAgencia.setError(null);
+
         }
         if (equipo.isEmpty()) {
             etNombreEquipo.setError("Este campo es requerido");
             etNombreEquipo.requestFocus();
             return;
+        }else {
+            etNombreEquipo.setError(null);
         }
         if (encargado.isEmpty()) {
             etNombreEncargado.setError("Este campo es requerido");
@@ -142,9 +149,8 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
         long newRowId = -1;
 
         try {
-
-        db = adminSQLiteOpenHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
+            db = adminSQLiteOpenHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
 
         values.put(COLUMN_AGENCIA, agencia);
         values.put(COLUMN_EQUIPO, equipo);
@@ -179,9 +185,9 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
                 etNombreAgencia.setText("");
                 etNombreEquipo.setText("");
                 etNombreEncargado.setText("");
-                VersionWindows.setText("");
-                MemoriaRam.setText("");
-                VersionAntivirus.setText("");
+                acVersionWindows.setText("", false);
+                acMemoriaRam.setText("", false);
+                acVersionAntivirus.setText("", false);
                 etDireccionIp.setText("");
                 etNoActivo.setText("");
 
