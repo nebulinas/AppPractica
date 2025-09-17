@@ -144,7 +144,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
-                    android:drawableStart="@drawable/ic_tecnicas"
+                    android:drawableStart="@drawable/informaciontecnica"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
                     android:text="Información Técnica"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textColor="#3F51B5" />
