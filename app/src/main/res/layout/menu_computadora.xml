@@ -55,8 +55,9 @@
                 android:id="@+id/btn_registrar"
                 android:layout_width="93dp"
                 android:layout_height="90dp"
+                android:layout_gravity="center"
                 android:background="@drawable/rigistrar"
-                android:layout_gravity="center"/>
+                android:clickable="true" />
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="25dp" />
@@ -71,12 +72,14 @@
             <Space
             android:layout_width="match_parent"
             android:layout_height="25dp" />
+
             <ImageView
                 android:id="@+id/btn_editar"
                 android:layout_width="93dp"
                 android:layout_height="90dp"
                 android:layout_gravity="center"
-                android:background="@drawable/editable" />
+                android:background="@drawable/editable"
+                android:clickable="true" />
 
             <Space
                 android:layout_width="match_parent"
@@ -94,14 +97,13 @@
                 android:layout_height="25dp" />
 
 
-
-
             <ImageView
                 android:id="@+id/btn_eliminar"
                 android:layout_width="92dp"
                 android:layout_height="90dp"
                 android:layout_gravity="center"
-                android:background="@drawable/delete_svgrepo_com" />
+                android:background="@drawable/delete_svgrepo_com"
+                android:clickable="true" />
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="25dp" />
@@ -114,6 +116,7 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="25dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/boton_regresar"
                 android:layout_width="wrap_content"
