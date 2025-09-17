@@ -7,13 +7,18 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/encabezado"
         android:layout_width="match_parent"
         android:layout_height="68dp"
         android:background="#3F51B5"
-        android:text="TextView"
-        android:textColor="#3F51B5" />
-
+        android:fontFamily="@font/monserrat"
+        android:gravity="center"
+        android:text="MENÙ"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/textView12"
         android:layout_width="match_parent"

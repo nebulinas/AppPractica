@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class EditarActivity extends AppCompatActivity {
-
+    //Echo por Herielis
     // Variables para la UI
     private TextInputEditText buscarEquipo, nombreEquipo, encargado, numeroActivo,
             versionAntivirus, direccionIp;
@@ -67,7 +67,7 @@ public class EditarActivity extends AppCompatActivity {
     }
 
     private void inicializarComponentes() {
-        // Campos de texto
+        // Campo de texto
         buscarEquipo = findViewById(R.id.buscar_equipo);
         nombreEquipo = findViewById(R.id.nombre_equipo);
         encargado = findViewById(R.id.encargado);
@@ -86,7 +86,7 @@ public class EditarActivity extends AppCompatActivity {
         botonRegresar = findViewById(R.id.card_boton_regresar);
         imgRegresar = findViewById(R.id.boton_regresar);
 
-        // TextViews informativos
+
         textoUltimaModificacion = findViewById(R.id.texto_ultima_modificacion);
         textoModificadoPor = findViewById(R.id.texto_modificado_por);
 
@@ -95,12 +95,12 @@ public class EditarActivity extends AppCompatActivity {
     }
 
     private void configurarDropdowns() {
-        // Configurar adapter para versiones de Windows
+        // Configuracion para adaptar versiones de Windows
         ArrayAdapter<String> adapterWindows = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, versionesWindows);
         versionWindows.setAdapter(adapterWindows);
 
-        // Configurar adapter para memoria RAM
+        // Configuracion  para adapter memoria RAM
         ArrayAdapter<String> adapterRam = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, opcionesRam);
         memoriaRam.setAdapter(adapterRam);
@@ -136,19 +136,19 @@ public class EditarActivity extends AppCompatActivity {
 
         bd = admin.getReadableDatabase();
 
-        // Buscar por nombre del equipo o número de activo
+        // Este es para buscar por nombre del equipo o número de activo
         Cursor cursor = bd.rawQuery(
                 "SELECT * FROM inventarioActivos WHERE equipo LIKE ? OR activo LIKE ?",
                 new String[]{"%" + terminoBusqueda + "%", "%" + terminoBusqueda + "%"}
         );
 
         if (cursor.moveToFirst()) {
-            // Encontró el equipo, cargar los datos
+            // Este es para cuando encontro equipo para cargar datos
             cargarDatosEquipo(cursor);
             habilitarCamposEdicion(true);
             Toast.makeText(this, "Equipo encontrado", Toast.LENGTH_SHORT).show();
         } else {
-            // No encontró el equipo
+            // No encontro el equipo
             limpiarCampos();
             habilitarCamposEdicion(false);
             Toast.makeText(this, "No se encontró el equipo", Toast.LENGTH_LONG).show();
@@ -171,7 +171,7 @@ public class EditarActivity extends AppCompatActivity {
         versionAntivirus.setText(cursor.getString(cursor.getColumnIndexOrThrow("antivirus")));
         direccionIp.setText(cursor.getString(cursor.getColumnIndexOrThrow("ip")));
 
-        // Actualizar información de modificación (simulada por ahora)
+        // Actualizar información de modificación
         actualizarInfoModificacion();
     }
 
@@ -226,7 +226,7 @@ public class EditarActivity extends AppCompatActivity {
             return false;
         }
 
-        // Validar formato de IP (básico)
+        // Validar formato de IP
         String ip = direccionIp.getText().toString().trim();
         if (!ip.isEmpty() && !esIPValida(ip)) {
             direccionIp.setError("Formato de IP inválido");
@@ -263,7 +263,7 @@ public class EditarActivity extends AppCompatActivity {
         botonGuardarCambios.setEnabled(habilitar);
         botonCancelar.setEnabled(habilitar);
 
-        // El número de activo siempre permanece deshabilitado
+        // Es para que el número de activo siempre permanesca deshabilitado
         numeroActivo.setEnabled(false);
     }
 

@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.card.MaterialCardView;
 
 public class MainActivity extends AppCompatActivity {
-
+//hecho por Yaxchel
     public MaterialCardView btnComputadoras, btnCamaras, btnHistorial;
 
     @Override

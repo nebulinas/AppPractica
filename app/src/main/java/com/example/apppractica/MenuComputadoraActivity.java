@@ -11,9 +11,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.button.MaterialButton;
+//Echo por Herielis
 public class MenuComputadoraActivity extends AppCompatActivity {
 
-    private ImageView btnEditar, btnRegistrar, btnEliminar, btnRegresar;
+    private ImageView btnEditar, btnRegistrar, btnEliminar;
+    private MaterialButton btnRegresar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,20 +29,14 @@ public class MenuComputadoraActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Inicializar los botones en este caso ImageView
-        inicializarBotones();
-
-        // Configurar los listeners
-        configurarListeners();
-    }
-
-    private void inicializarBotones() {
-        // Aquí debes poner los IDs correctos de tus ImageView del archivo XML
         btnEditar = findViewById(R.id.btn_editar); // botón editar
         btnRegistrar = findViewById(R.id.btn_registrar); // botón guardar
         btnEliminar = findViewById(R.id.btn_eliminar); // botón eliminar
         btnRegresar = findViewById(R.id.boton_regresar); // botón regresar
+
+        configurarListeners();
     }
+
 
     private void configurarListeners() {
         // Botón Editar

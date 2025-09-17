@@ -7,13 +7,12 @@
         android:layout_height="match_parent"
         tools:openDrawer="start">
 
-        <!-- Contenido principal de la pantalla -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- Toolbar -->
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -27,7 +26,6 @@
                     android:backgroundTint="#FF9800"/>
             </com.google.android.material.appbar.AppBarLayout>
 
-            <!-- Contenedor del Botón de Regreso -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_boton_regresar"
                 android:layout_width="wrap_content"
@@ -73,7 +71,6 @@
                     android:orientation="vertical"
                     android:paddingBottom="16dp">
 
-                    <!-- Sección de búsqueda -->
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -127,7 +124,6 @@
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Información básica -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -171,7 +167,6 @@
                             android:inputType="textPersonName"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Número de activo (solo lectura para edición) -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/layout_numero_activo"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -191,7 +186,7 @@
                             android:inputType="none"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Especificaciones técnicas -->
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -233,7 +228,7 @@
                             android:inputType="none"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Seguridad y Red -->
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -276,7 +271,6 @@
                             android:inputType="textUri"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Información de modificación -->
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -324,7 +318,6 @@
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Botones de acción -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -332,7 +325,7 @@
                         android:gravity="center"
                         android:layout_marginBottom="24dp">
 
-                        <!-- Botón Cancelar -->
+
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/boton_cancelar"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -346,7 +339,6 @@
                             app:icon="@drawable/ic_cancelar"
                             app:iconGravity="textStart"/>
 
-                        <!-- Botón Guardar Cambios -->
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/boton_guardar"
                             style="@style/Widget.MaterialComponents.Button"

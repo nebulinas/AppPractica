@@ -20,8 +20,8 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class EliminarActivity extends AppCompatActivity {
-
-    // Variables para la UI
+    //Echo por herielis
+    // Variables para la UI (interfaz de usuario)
     private TextInputEditText buscarEquipo, nombreEquipoMostrar, encargadoMostrar,
             windowsMostrar, ramMostrar, antivirusMostrar,
             ipMostrar, activoMostrar;
@@ -62,7 +62,7 @@ public class EliminarActivity extends AppCompatActivity {
         // Campo de búsqueda
         buscarEquipo = findViewById(R.id.buscar_equipo);
 
-        // Campos de información (solo lectura)
+        // Campo de información
         nombreEquipoMostrar = findViewById(R.id.nombre_equipo_mostrar);
         encargadoMostrar = findViewById(R.id.encargado_mostrar);
         windowsMostrar = findViewById(R.id.windows_mostrar);
@@ -110,20 +110,18 @@ public class EliminarActivity extends AppCompatActivity {
 
         bd = admin.getReadableDatabase();
 
-        // Buscar por nombre del equipo o número de activo
+        // Es para poder buscar número de activo
         Cursor cursor = bd.rawQuery(
                 "SELECT * FROM inventarioActivos WHERE equipo LIKE ? OR activo LIKE ?",
                 new String[]{"%" + terminoBusqueda + "%", "%" + terminoBusqueda + "%"}
         );
 
         if (cursor.moveToFirst()) {
-            // Encontró el equipo, cargar los datos
             cargarDatosEquipo(cursor);
             equipoEncontrado = true;
             botonEliminar.setEnabled(true);
             Toast.makeText(this, "Equipo encontrado", Toast.LENGTH_SHORT).show();
         } else {
-            // No encontró el equipo
             limpiarCampos();
             equipoEncontrado = false;
             botonEliminar.setEnabled(false);
@@ -135,10 +133,9 @@ public class EliminarActivity extends AppCompatActivity {
     }
 
     private void cargarDatosEquipo(Cursor cursor) {
-        // Guardar el ID del equipo actual
+        // Guardar el ID
         equipoActualId = cursor.getString(cursor.getColumnIndexOrThrow("id"));
 
-        // Cargar los datos en los campos de solo lectura
         nombreEquipoMostrar.setText(cursor.getString(cursor.getColumnIndexOrThrow("equipo")));
         encargadoMostrar.setText(cursor.getString(cursor.getColumnIndexOrThrow("encargado")));
         windowsMostrar.setText(cursor.getString(cursor.getColumnIndexOrThrow("windows")));
@@ -157,7 +154,6 @@ public class EliminarActivity extends AppCompatActivity {
         String nombreEquipo = nombreEquipoMostrar.getText().toString();
         String numeroActivo = activoMostrar.getText().toString();
 
-        // Crear el diálogo de confirmación
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("⚠️ Confirmar Eliminación");
         builder.setMessage("¿Está seguro de que desea eliminar permanentemente el siguiente equipo?\n\n" +
@@ -165,7 +161,6 @@ public class EliminarActivity extends AppCompatActivity {
                 "Número de Activo: " + numeroActivo + "\n\n" +
                 "Esta acción NO SE PUEDE DESHACER.");
 
-        // Configurar botones del diálogo
         builder.setPositiveButton("Eliminar", (dialog, which) -> {
             eliminarEquipo();
         });
@@ -174,11 +169,9 @@ public class EliminarActivity extends AppCompatActivity {
             dialog.dismiss();
         });
 
-        // Personalizar colores
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        // Cambiar color del botón "Eliminar" a rojo
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(android.R.color.holo_red_dark));
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(android.R.color.darker_gray));
     }
@@ -187,24 +180,19 @@ public class EliminarActivity extends AppCompatActivity {
         bd = admin.getWritableDatabase();
 
         try {
-            // Realizar la eliminación
             int filasEliminadas = bd.delete("inventarioActivos", "id=?", new String[]{equipoActualId});
 
             if (filasEliminadas > 0) {
-                // Eliminación exitosa
                 Toast.makeText(this, "Equipo eliminado exitosamente", Toast.LENGTH_LONG).show();
 
-                // Mostrar diálogo de confirmación de eliminación
                 mostrarDialogoEliminacionExitosa();
 
-                // Limpiar los campos y restablecer el estado
                 limpiarCampos();
                 equipoActualId = "";
                 equipoEncontrado = false;
                 botonEliminar.setEnabled(false);
-
+// por si existe algun error de eliminacion
             } else {
-                // Error en la eliminación
                 Toast.makeText(this, "Error al eliminar el equipo", Toast.LENGTH_SHORT).show();
             }
 
@@ -226,7 +214,6 @@ public class EliminarActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        // Cambiar color del botón a verde
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(android.R.color.holo_green_dark));
     }
 
