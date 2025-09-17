@@ -14,8 +14,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE inventarioActivos (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "agencia TEXT," +
-                "equipo TEXT, " +
+                "agencia VARCHAR(50)," +
+                "equipo VARCHAR, " +
                 "encargado TEXT, " +
                 "windows TEXT, " +
                 "ram TEXT, " +
@@ -25,7 +25,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
                 ")");
      //Tabla Inventario de Cámaras hecho por Yaxchel Xol
         db.execSQL("CREATE TABLE inventarioActivosCámaras (" +
-                "id INTERGER PRIMARY KEY AUTOINCREMENT,"+
+                "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "ActivoAlta VARCHAR(20),"+
                 "ActivoBaja VARCHAR(20), "+
                 "areaInstalacion TEXT"+
