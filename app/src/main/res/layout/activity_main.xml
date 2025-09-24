@@ -17,7 +17,6 @@
         app:titleCentered="true"
         android:backgroundTint="#3F51B5"/>
 
-
     <Space
         android:layout_width="match_parent"
         android:layout_height="24dp" />

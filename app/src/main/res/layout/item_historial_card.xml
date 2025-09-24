@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#6A9181"
+        android:outlineAmbientShadowColor="@color/white"
+        android:outlineSpotShadowColor="@color/cardview_light_background"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_card_equipo_nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre del Equipo"
+            android:textColorHighlight="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_card_activo_numero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activo: 12345"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tv_card_agencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agencia: Central"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tv_card_encargado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Encargado: Juan Pérez"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tv_card_ip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IP: 192.168.1.100"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tv_card_ram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tamaño Memoria RAM: 8 GB"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tv_card_windows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Versión Windows: 10 PRO"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:layout_marginTop="4dp" />
+        <TextView
+            android:id="@+id/tv_card_antivirus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Versión del antivirus: Eset 12.0"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tv_card_fecha_cambio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha cambio: 2023-09-15"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:layout_marginTop="4dp" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

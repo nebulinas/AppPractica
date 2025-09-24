@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -27,6 +28,7 @@ import java.util.Locale;
 public class EditarActivity extends AppCompatActivity {
     //Echo por Herielis
     // Variables para la UI
+
     private TextInputEditText buscarEquipo, nombreEquipo, encargado, numeroActivo,
             versionAntivirus, direccionIp;
     private AutoCompleteTextView versionWindows, memoriaRam;
@@ -36,9 +38,25 @@ public class EditarActivity extends AppCompatActivity {
     private TextView textoUltimaModificacion, textoModificadoPor;
 
     // Variables para la base de datos
-    private AdminSQLiteOpenHelper admin;
+    private AdminSQLiteOpenHelper adminSQLiteOpenHelper;
     private SQLiteDatabase bd;
     private String equipoActualId = "";
+
+    private static final String DATABASE_NAME = "inventarioActivos.db";
+    private static final int DATABASE_VERSION = 3;
+    private static final String TABLE_INVENTARIO= "inventarioActivos";
+    public static final String COLUMN_AGENCIA = "agencia";
+    public static final String COLUMN_EQUIPO = "equipo";
+    public static final String COLUMN_IDENCARGADO = "idencargado";
+    public static final String COLUMN_WINDOWS = "windows";
+    public static final String COLUMN_RAM = "ram";
+    public static final String COLUMN_ANTIVIRUS = "antivirus";
+    public static final String COLUMN_IP = "ip";
+    public static final String COLUMN_ACTIVO = "activo";
+
+    public static final String TABLE_ENCARGADO = "encargadoEquipo"; //conectarlo con la tabla encargadoEquipo
+    public static final String COLUMN_ENCARGADO_NOMBRE = "nombre";
+
 
     // Arrays para los dropdowns
     private String[] versionesWindows = {"Windows 10", "Windows 11", "Windows Server 2019",
@@ -63,7 +81,9 @@ public class EditarActivity extends AppCompatActivity {
         configurarEventos();
 
         // Inicializar base de datos
-        admin = new AdminSQLiteOpenHelper(this, "inventario.db", null, 1);
+        adminSQLiteOpenHelper = new AdminSQLiteOpenHelper(
+                this, "inventarioActivos.db",
+                null, DATABASE_VERSION);
     }
 
     private void inicializarComponentes() {
@@ -128,19 +148,25 @@ public class EditarActivity extends AppCompatActivity {
 
     private void buscarEquipo() {
         String terminoBusqueda = buscarEquipo.getText().toString().trim();
+        Log.d("BUSQUEDA", "Termino a buscar: " + terminoBusqueda + "");
 
         if (terminoBusqueda.isEmpty()) {
             Toast.makeText(this, "Por favor ingrese un término de búsqueda", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        bd = admin.getReadableDatabase();
+        bd = adminSQLiteOpenHelper.getReadableDatabase();
 
         // Este es para buscar por nombre del equipo o número de activo
-        Cursor cursor = bd.rawQuery(
-                "SELECT * FROM inventarioActivos WHERE equipo LIKE ? OR activo LIKE ?",
-                new String[]{"%" + terminoBusqueda + "%", "%" + terminoBusqueda + "%"}
-        );
+        // Cambio hecho por yaxchel xol
+        String query = "SELECT " +
+                "i.id, i.equipo, i.idencargado, i.windows, i.ram, i.antivirus, i.ip, i.activo, " +
+                "e.nombre AS nombre_encargado " +
+                "FROM inventarioActivos i " +
+                "INNER JOIN encargadoEquipo e ON i.idencargado = e.idencargado " +
+                "WHERE LOWER(i.equipo) LIKE LOWER(?) OR LOWER(i.activo) LIKE LOWER(?)";
+
+        Cursor cursor = bd.rawQuery(query, new String[]{"%" + terminoBusqueda + "%", "%" + terminoBusqueda + "%"});
 
         if (cursor.moveToFirst()) {
             // Este es para cuando encontro equipo para cargar datos
@@ -164,7 +190,7 @@ public class EditarActivity extends AppCompatActivity {
 
         // Cargar los datos en los campos
         nombreEquipo.setText(cursor.getString(cursor.getColumnIndexOrThrow("equipo")));
-        encargado.setText(cursor.getString(cursor.getColumnIndexOrThrow("encargado")));
+        encargado.setText(cursor.getString(cursor.getColumnIndexOrThrow("nombre_encargado")));
         numeroActivo.setText(cursor.getString(cursor.getColumnIndexOrThrow("activo")));
         versionWindows.setText(cursor.getString(cursor.getColumnIndexOrThrow("windows")), false);
         memoriaRam.setText(cursor.getString(cursor.getColumnIndexOrThrow("ram")), false);
@@ -185,12 +211,39 @@ public class EditarActivity extends AppCompatActivity {
         if (!validarCampos()) {
             return;
         }
+//Cambio hecho por yaxchel
+        bd = adminSQLiteOpenHelper.getWritableDatabase();
+        bd.beginTransaction();
 
-        bd = admin.getWritableDatabase();
+        try {
+            String nuevoEncargadoNombre = encargado.getText().toString().trim();
+            long idEncargado;
+
+            Cursor cursorEncargado = null;
+            try {
+                cursorEncargado = bd.rawQuery("SELECT idencargado FROM encargadoEquipo WHERE nombre = ?", new String[]{nuevoEncargadoNombre});
+
+                if (cursorEncargado.moveToFirst()) {
+                    idEncargado = cursorEncargado.getLong(cursorEncargado.getColumnIndexOrThrow(COLUMN_IDENCARGADO));
+                } else {
+                    // Por si el encargado no existe
+                    ContentValues valuesEncargado = new ContentValues();
+                    valuesEncargado.put("nombre", nuevoEncargadoNombre);
+                    idEncargado = bd.insert("encargadoEquipo", null, valuesEncargado);
+                }
+            } finally {
+                if (cursorEncargado != null) {
+                    cursorEncargado.close();
+                }
+            }
+
+            if (idEncargado == -1) {
+                throw new Exception("No se pudo encontrar al encargado");
+            }
 
         ContentValues registro = new ContentValues();
         registro.put("equipo", nombreEquipo.getText().toString().trim());
-        registro.put("encargado", encargado.getText().toString().trim());
+        registro.put(COLUMN_IDENCARGADO, idEncargado);
         registro.put("windows", versionWindows.getText().toString());
         registro.put("ram", memoriaRam.getText().toString());
         registro.put("antivirus", versionAntivirus.getText().toString().trim());
@@ -199,6 +252,7 @@ public class EditarActivity extends AppCompatActivity {
         int filasAfectadas = bd.update("inventarioActivos", registro, "id=?", new String[]{equipoActualId});
 
         if (filasAfectadas > 0) {
+            bd.setTransactionSuccessful();
             Toast.makeText(this, "Equipo actualizado exitosamente", Toast.LENGTH_SHORT).show();
             actualizarInfoModificacion();
             limpiarCampos();
@@ -208,7 +262,13 @@ public class EditarActivity extends AppCompatActivity {
             Toast.makeText(this, "Error al actualizar el equipo", Toast.LENGTH_SHORT).show();
         }
 
-        bd.close();
+        } catch (Exception e) {
+            Log.e("EditarActivity", "Error al actualizar el equipo", e);
+            Toast.makeText(this, "Error al actualizar el equipo: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        } finally {
+            bd.endTransaction(); //Termina la transacción.
+            bd.close();
+        }
     }
 
     private boolean validarCampos() {

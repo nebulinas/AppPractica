@@ -13,19 +13,15 @@
         android:orientation="vertical">
 
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="Inventario de Activos Camaras"
-            android:backgroundTint="#3F51B5"/>
+            android:backgroundTint="#3F51B5"
+            app:titleCentered="true"
+            app:title="Inventario de Activos Camaras" />
 
-    </com.google.android.material.appbar.AppBarLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_regresar"
@@ -82,7 +78,7 @@
             android:gravity="center_vertical"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@id/layout_camara_alta"
+        android:id="@+id/layout_camara_alta"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,10 +99,10 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="148dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:hint="Área de Instalación"
-            app:helperText="obligatorio">
+            app:helperText="Obligatorio">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -126,16 +122,6 @@
 
     </LinearLayout>
 
-
-
 </ScrollView>
-
-
-
-
-
-
-        </LinearLayout>
-
-
+    </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

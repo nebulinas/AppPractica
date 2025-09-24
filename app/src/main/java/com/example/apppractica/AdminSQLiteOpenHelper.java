@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
+    private static final int DATABASE_VERSION = 3;
 //Hecho por Hab'il
     public AdminSQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -12,24 +13,34 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //Yaxchel Xol
+        db.execSQL("CREATE TABLE encargadoEquipo("+
+                "idencargado INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "nombre VARCHAR(50)" +
+                ")");
+
         db.execSQL("CREATE TABLE inventarioActivos (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "agencia VARCHAR(50)," +
                 "equipo VARCHAR, " +
-                "encargado TEXT, " +
+                "idencargado INTEGER, " +
                 "windows TEXT, " +
                 "ram TEXT, " +
                 "antivirus TEXT ," +
                 "ip TEXT, "+
-                "activo VARCHAR(20)" +
+                "activo VARCHAR(20)," +
+                "fecha_cambio TEXT, " +
+                "Foreign Key (idencargado) REFERENCES encargadoEquipo(idencargado)" +
                 ")");
+
      //Tabla Inventario de Cámaras hecho por Yaxchel Xol
         db.execSQL("CREATE TABLE inventarioActivosCámaras (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "idcamara INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "ActivoAlta VARCHAR(20),"+
                 "ActivoBaja VARCHAR(20), "+
-                "areaInstalacion TEXT"+
-                ")");
+                "areaInstalacion TEXT DEFAULT CURRENT_TIMESTAMP"+
+                ");"
+        );
     }
 
     @Override
@@ -42,5 +53,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            if (oldVersion < 2) {
+                db.execSQL("ALTER TABLE inventarioActivos ADD COLUMN fecha_cambio TEXT;");
+            }
+        }
     }
-}

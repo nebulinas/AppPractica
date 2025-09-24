@@ -17,7 +17,7 @@
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="40sp"
         android:textStyle="bold" />
     <TextView
         android:id="@+id/textView12"
@@ -26,7 +26,7 @@
         android:text="Inventario Activos de Computadoras"
         android:textAlignment="center"
         android:textColor="#3F51B5"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
     <Space
         android:layout_width="match_parent"
@@ -45,18 +45,12 @@
             android:orientation="vertical" >
 
 
-
-            <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
-
-
             <ImageView
                 android:id="@+id/btn_registrar"
-                android:layout_width="93dp"
-                android:layout_height="90dp"
+                android:layout_width="104dp"
+                android:layout_height="98dp"
                 android:layout_gravity="center"
-                android:background="@drawable/rigistrar"
+                android:background="@drawable/registrar"
                 android:clickable="true" />
             <Space
                 android:layout_width="match_parent"
@@ -99,8 +93,8 @@
 
             <ImageView
                 android:id="@+id/btn_eliminar"
-                android:layout_width="92dp"
-                android:layout_height="90dp"
+                android:layout_width="100dp"
+                android:layout_height="103dp"
                 android:layout_gravity="center"
                 android:background="@drawable/delete_svgrepo_com"
                 android:clickable="true" />
@@ -113,6 +107,18 @@
                 android:layout_height="wrap_content"
                 android:text="Eliminar"
                 android:textAlignment="center" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="25dp" />

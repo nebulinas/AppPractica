@@ -20,18 +20,20 @@ import com.google.android.material.textfield.TextInputEditText;
 public class InventarioComputadorasActivity extends AppCompatActivity {
 
     private static final String DATABASE_NAME = "inventarioActivos.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     private static final String TABLE_INVENTARIO= "inventarioActivos";
     public static final String COLUMN_AGENCIA = "agencia";
     public static final String COLUMN_EQUIPO = "equipo";
-    public static final String COLUMN_ENCARGADO = "encargado";
     public static final String COLUMN_WINDOWS = "windows";
+    public static final String COLUMN_IDENCARGADO = "idencargado";
     public static final String COLUMN_RAM = "ram";
     public static final String COLUMN_ANTIVIRUS = "antivirus";
     public static final String COLUMN_IP = "ip";
     public static final String COLUMN_ACTIVO = "activo";
 
+    public static final String TABLE_ENCARGADO = "encargadoEquipo"; //conectarlo con la tabla encargadoEquipo
+    public static final String COLUMN_ENCARGADO_NOMBRE = "nombre";
 
     private TextInputEditText etNombreAgencia, etNombreEquipo, etNombreEncargado,  etDireccionIp, etNoActivo;
     private AutoCompleteTextView  acMemoriaRam, acVersionWindows, acVersionAntivirus;
@@ -146,34 +148,50 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
 
 
         SQLiteDatabase db = null;
-        long newRowId = -1;
+        long idEncargado = -1;
+        long idInventario = -1;
 
         try {
             db = adminSQLiteOpenHelper.getWritableDatabase();
+            db.beginTransaction();
+
+            ContentValues valuesEncargado = new ContentValues();
+            valuesEncargado.put(COLUMN_ENCARGADO_NOMBRE, encargado);
+            idEncargado = db.insertOrThrow(TABLE_ENCARGADO, null, valuesEncargado);
+            if (idEncargado == -1) {
+                throw new android.database.SQLException("Error al insertar en la tabla encargadoEquipo");
+            }
+
             ContentValues values = new ContentValues();
 
         values.put(COLUMN_AGENCIA, agencia);
         values.put(COLUMN_EQUIPO, equipo);
-        values.put(COLUMN_ENCARGADO, encargado);
+        values.put(COLUMN_IDENCARGADO, idEncargado);
         values.put(COLUMN_WINDOWS, windows);
         values.put(COLUMN_RAM, ram);
         values.put(COLUMN_ANTIVIRUS, antivirus);
         values.put(COLUMN_IP, ip);
         values.put(COLUMN_ACTIVO, activo);
 
-        newRowId = db.insertOrThrow(TABLE_INVENTARIO, null, values);
+        idInventario = db.insert(TABLE_INVENTARIO, null, values);
 
-    } catch (android.database.SQLException e) {
+        if (idInventario == -1) {
+            throw new Exception("Error al insertar el inventario.");
+            }
+
+        db.setTransactionSuccessful();
+
+    } catch (Exception e) {
         Log.e("InventarioComputadoras", "Error al insertar en la base de datos", e);
         Toast.makeText(this,"Error al guardar en la Base de datos:"+ e.getMessage(), Toast.LENGTH_LONG).show();
     } finally {
        if (db   != null)
-
+        db.endTransaction();
         db.close();
 
         }
 
-        if (newRowId != -1) {
+        if (idInventario != -1) {
             Toast.makeText(this, "Registro guardado con éxito", Toast.LENGTH_SHORT).show();
             limpiarCampos();
             etNombreAgencia.requestFocus();

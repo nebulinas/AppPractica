@@ -30,6 +30,7 @@ public class EliminarActivity extends AppCompatActivity {
     private ImageView imgRegresar;
 
     // Variables para la base de datos
+    private static final int DATABASE_VERSION = 3;
     private AdminSQLiteOpenHelper admin;
     private SQLiteDatabase bd;
     private String equipoActualId = "";
@@ -52,7 +53,7 @@ public class EliminarActivity extends AppCompatActivity {
         configurarEventos();
 
         // Inicializar base de datos
-        admin = new AdminSQLiteOpenHelper(this, "inventario.db", null, 1);
+        admin = new AdminSQLiteOpenHelper(this, "inventarioActivos.db", null, DATABASE_VERSION);
 
         // Inicialmente deshabilitar el botón de eliminar
         botonEliminar.setEnabled(false);
@@ -111,10 +112,12 @@ public class EliminarActivity extends AppCompatActivity {
         bd = admin.getReadableDatabase();
 
         // Es para poder buscar número de activo
-        Cursor cursor = bd.rawQuery(
-                "SELECT * FROM inventarioActivos WHERE equipo LIKE ? OR activo LIKE ?",
-                new String[]{"%" + terminoBusqueda + "%", "%" + terminoBusqueda + "%"}
-        );
+        String query = "SELECT i.id, i.equipo, e.nombre AS nombre_encargado, i.windows, i.ram, i.antivirus, i.ip, i.activo " +
+                "FROM inventarioActivos i " +
+                "LEFT JOIN encargadoEquipo e ON i.idencargado = e.idencargado " +
+                "WHERE i.equipo LIKE ? OR i.activo LIKE ?";
+
+        Cursor cursor = bd.rawQuery(query, new String[]{"%" + terminoBusqueda + "%", "%" + terminoBusqueda + "%"});
 
         if (cursor.moveToFirst()) {
             cargarDatosEquipo(cursor);
@@ -137,7 +140,12 @@ public class EliminarActivity extends AppCompatActivity {
         equipoActualId = cursor.getString(cursor.getColumnIndexOrThrow("id"));
 
         nombreEquipoMostrar.setText(cursor.getString(cursor.getColumnIndexOrThrow("equipo")));
-        encargadoMostrar.setText(cursor.getString(cursor.getColumnIndexOrThrow("encargado")));
+        String nombreEncargado = cursor.getString(cursor.getColumnIndexOrThrow("nombre_encargado"));
+        if (nombreEncargado == null) {
+            encargadoMostrar.setText("No asignado");
+        } else {
+            encargadoMostrar.setText(nombreEncargado);
+        }
         windowsMostrar.setText(cursor.getString(cursor.getColumnIndexOrThrow("windows")));
         ramMostrar.setText(cursor.getString(cursor.getColumnIndexOrThrow("ram")));
         antivirusMostrar.setText(cursor.getString(cursor.getColumnIndexOrThrow("antivirus")));

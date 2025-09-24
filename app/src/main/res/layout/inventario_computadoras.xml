@@ -22,9 +22,9 @@
                 android:id="@+id/topAppBar"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:title="Inventario Computadoras"
-                android:backgroundTint="#3F51B5"/>
+                android:layout_height="89dp"
+                android:backgroundTint="#3F51B5"
+                app:title="Inventario Computadoras" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
