@@ -1,4 +1,5 @@
 package com.example.apppractica;
+
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -6,13 +7,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
@@ -32,81 +34,69 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
     public static final String COLUMN_IP = "ip";
     public static final String COLUMN_ACTIVO = "activo";
 
-    public static final String TABLE_ENCARGADO = "encargadoEquipo"; //conectarlo con la tabla encargadoEquipo
+    public static final String TABLE_ENCARGADO = "encargadoEquipo";
     public static final String COLUMN_ENCARGADO_NOMBRE = "nombre";
 
-    private TextInputEditText etNombreAgencia, etNombreEquipo, etNombreEncargado,  etDireccionIp, etNoActivo;
-    private AutoCompleteTextView  acMemoriaRam, acVersionWindows, acVersionAntivirus;
+    private AutoCompleteTextView etNombreAgencia;
+    private TextInputEditText etNombreEquipo, etNombreEncargado, etDireccionIp, etNoActivo;
+    private AutoCompleteTextView acMemoriaRam, acVersionWindows, acVersionAntivirus;
     private MaterialButton btnGuardar;
     private MaterialCardView cardBotonRegresar;
 
     private AdminSQLiteOpenHelper adminSQLiteOpenHelper;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.inventario_computadoras);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-
-
         adminSQLiteOpenHelper = new AdminSQLiteOpenHelper(this, DATABASE_NAME, null, DATABASE_VERSION);
-
 
         etNombreAgencia = findViewById(R.id.nombre_agencia);
         etNombreEquipo = findViewById(R.id.nombre_equipo);
         etNombreEncargado = findViewById(R.id.nombre_encargado);
         acVersionWindows = findViewById(R.id.version_windows);
-
         acMemoriaRam = findViewById(R.id.memoria_ram);
         acVersionAntivirus = findViewById(R.id.version_antivirus);
-
         etDireccionIp = findViewById(R.id.direccion_ip);
         etNoActivo = findViewById(R.id.no_activo);
         btnGuardar = findViewById(R.id.boton_guardar);
         cardBotonRegresar = findViewById(R.id.card_boton_regresar);
 
-
-        String[] opcionesRam ={"2 GB", "4 GB", "8 GB", "16 GB", "32 GB", "64 GB" };
-        ArrayAdapter<String> adapterRam = new ArrayAdapter<>
-                (this, android.R.layout.simple_dropdown_item_1line, opcionesRam);
+        String[] opcionesRam = {"2 GB", "4 GB", "8 GB", "16 GB", "32 GB", "64 GB"};
+        ArrayAdapter<String> adapterRam = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, opcionesRam);
         acMemoriaRam.setAdapter(adapterRam);
 
-        String[] versionesWindows = {"Windows 10 Pro", "Windows 11 Pro", "Windows 10 Home", "Windows 11 Home" };
-        ArrayAdapter<String> adapterWindows = new ArrayAdapter<>
-                (this, android.R.layout.simple_dropdown_item_1line, versionesWindows);
+        String[] versionesWindows = {"Windows 10 Pro", "Windows 11 Pro", "Windows 10 Home", "Windows 11 Home"};
+        ArrayAdapter<String> adapterWindows = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, versionesWindows);
         acVersionWindows.setAdapter(adapterWindows);
 
         String[] versionAntivirus = {"Eset 12.0", "Eset 10.0"};
-        ArrayAdapter<String> adapterAntivirus = new ArrayAdapter<>
-                (this, android.R.layout.simple_dropdown_item_1line, versionAntivirus);
+        ArrayAdapter<String> adapterAntivirus = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, versionAntivirus);
         acVersionAntivirus.setAdapter(adapterAntivirus);
 
+        String[] agencias = {
+                "Administración", "Ag. Central", "Ag. Sololá", "Ag. Novillero", "Ag. San Pedro",
+                "Ag. Nahualá", "Ag. La Esperanza", "Ag. Joyabaj", "Ag. Santa Clara",
+                "Ag. Santa Lucía", "Ag. Panajachel", "Ag. Chichicastenango", "Ag. Santiago",
+                "Ag. Ixtahuacán", "Ag. El Carmen", "Ag. La Concordia", "Ag. Los Encuentros",
+                "Ag. El Calvario", "Ag. Santo Tomás", "Ag. San Juan", "Ag. Zacualpa",
+                "Ag. Quiché", "Ag. Guineales", "Ag. San Andrés", "Ag. Concepción"
+        };
+        ArrayAdapter<String> adapterAgencias = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, agencias);
+        etNombreAgencia.setAdapter(adapterAgencias);
 
-        btnGuardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                capturarYGuardarDatos();
-            }
-        });
-
+        btnGuardar.setOnClickListener(v -> capturarYGuardarDatos());
 
         if (cardBotonRegresar != null) {
-            cardBotonRegresar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    finish();
-                }
-            });
-
+            cardBotonRegresar.setOnClickListener(v -> finish());
         }
     }
 
@@ -120,32 +110,27 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
         String ip = etDireccionIp.getText().toString().trim();
         String activo = etNoActivo.getText().toString().trim();
 
-
         if (agencia.isEmpty()) {
             etNombreAgencia.setError("Este campo es requerido");
             etNombreAgencia.requestFocus();
             return;
-            } else {
+        } else {
             etNombreAgencia.setError(null);
-
         }
         if (equipo.isEmpty()) {
             etNombreEquipo.setError("Este campo es requerido");
             etNombreEquipo.requestFocus();
             return;
-        }else {
+        } else {
             etNombreEquipo.setError(null);
         }
         if (encargado.isEmpty()) {
             etNombreEncargado.setError("Este campo es requerido");
             etNombreEncargado.requestFocus();
             return;
-
         } else {
             etNombreEncargado.setError(null);
-
         }
-
 
         SQLiteDatabase db = null;
         long idEncargado = -1;
@@ -163,32 +148,31 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
             }
 
             ContentValues values = new ContentValues();
+            values.put(COLUMN_AGENCIA, agencia);
+            values.put(COLUMN_EQUIPO, equipo);
+            values.put(COLUMN_IDENCARGADO, idEncargado);
+            values.put(COLUMN_WINDOWS, windows);
+            values.put(COLUMN_RAM, ram);
+            values.put(COLUMN_ANTIVIRUS, antivirus);
+            values.put(COLUMN_IP, ip);
+            values.put(COLUMN_ACTIVO, activo);
 
-        values.put(COLUMN_AGENCIA, agencia);
-        values.put(COLUMN_EQUIPO, equipo);
-        values.put(COLUMN_IDENCARGADO, idEncargado);
-        values.put(COLUMN_WINDOWS, windows);
-        values.put(COLUMN_RAM, ram);
-        values.put(COLUMN_ANTIVIRUS, antivirus);
-        values.put(COLUMN_IP, ip);
-        values.put(COLUMN_ACTIVO, activo);
+            idInventario = db.insert(TABLE_INVENTARIO, null, values);
 
-        idInventario = db.insert(TABLE_INVENTARIO, null, values);
-
-        if (idInventario == -1) {
-            throw new Exception("Error al insertar el inventario.");
+            if (idInventario == -1) {
+                throw new Exception("Error al insertar el inventario.");
             }
 
-        db.setTransactionSuccessful();
+            db.setTransactionSuccessful();
 
-    } catch (Exception e) {
-        Log.e("InventarioComputadoras", "Error al insertar en la base de datos", e);
-        Toast.makeText(this,"Error al guardar:"+ e.getMessage(), Toast.LENGTH_LONG).show();
-    } finally {
-       if (db   != null)
-        db.endTransaction();
-        db.close();
-
+        } catch (Exception e) {
+            Log.e("InventarioComputadoras", "Error al insertar en la base de datos", e);
+            Toast.makeText(this, "Error al guardar:" + e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            if (db != null) {
+                db.endTransaction();
+                db.close();
+            }
         }
 
         if (idInventario != -1) {
@@ -199,28 +183,29 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
             Toast.makeText(this, "Error al guardar el registro", Toast.LENGTH_SHORT).show();
         }
     }
-            private void limpiarCampos() {
-                etNombreAgencia.setText("");
-                etNombreEquipo.setText("");
-                etNombreEncargado.setText("");
-                acVersionWindows.setText("", false);
-                acMemoriaRam.setText("", false);
-                acVersionAntivirus.setText("", false);
-                etDireccionIp.setText("");
-                etNoActivo.setText("");
 
-                etNombreAgencia.setError(null);
-                etNombreEquipo.setError(null);
-                etNombreEncargado.setError(null);
+    private void limpiarCampos() {
+        etNombreAgencia.setText("", false);
+        etNombreEquipo.setText("");
+        etNombreEncargado.setText("");
+        acVersionWindows.setText("", false);
+        acMemoriaRam.setText("", false);
+        acVersionAntivirus.setText("", false);
+        etDireccionIp.setText("");
+        etNoActivo.setText("");
 
-            }
+        etNombreAgencia.setError(null);
+        etNombreEquipo.setError(null);
+        etNombreEncargado.setError(null);
+    }
 
-            @Override
-            protected void onDestroy() {
+    @Override
+    protected void onDestroy() {
         if (adminSQLiteOpenHelper != null) {
             adminSQLiteOpenHelper.close();
         }
         super.onDestroy();
-            }
+    }
 }
+
 
