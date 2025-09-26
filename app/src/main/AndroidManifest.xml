@@ -23,9 +23,7 @@
         <activity
             android:name=".HistorialActivosActivity"
             android:exported="false" />
-        <activity
-            android:name=".InventarioCamarasActivity"
-            android:exported="false" />
+
         <activity
             android:name=".MenuComputadoraActivity"
             android:exported="false" />

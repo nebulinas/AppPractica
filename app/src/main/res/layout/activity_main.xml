@@ -89,7 +89,7 @@
 
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_activos_camaras"
+            android:id="@+id/card_activos_utilitarios"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="16dp"
@@ -110,14 +110,14 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/camara"
-                    android:contentDescription="Menú Cámaras"/>
+                    android:contentDescription="Menú utilitarios"/>
 
                 <TextView
                     android:id="@+id/textView_camaras"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Cámaras"
+                    android:text="Utilitarios"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     android:textAlignment="center"/>
             </LinearLayout>

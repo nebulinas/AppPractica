@@ -14,7 +14,7 @@ import com.google.android.material.card.MaterialCardView;
 
 public class MainActivity extends AppCompatActivity {
 //hecho por Yaxchel
-    public MaterialCardView btnComputadoras, btnCamaras, btnHistorial;
+    public MaterialCardView btnComputadoras, btnUtilitarios, btnHistorial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnComputadoras = findViewById(R.id.card_activos_computadoras);
-        btnCamaras = findViewById(R.id.card_activos_camaras);
+        btnUtilitarios = findViewById(R.id.card_activos_utilitarios);
         btnHistorial = findViewById(R.id.card_historial_mantenimiento);
 
         btnComputadoras.setOnClickListener(new View.OnClickListener() {
@@ -39,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnCamaras.setOnClickListener(new View.OnClickListener() {
+        btnUtilitarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, InventarioCamarasActivity.class);
+                Intent intent = new Intent(MainActivity.this, UtilitariosActivity.class);
                 startActivity(intent);
             }
         });

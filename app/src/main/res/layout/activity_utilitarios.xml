@@ -219,10 +219,34 @@
                         android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_adquisicion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:hint="Fecha Adquisicion">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/fecha_adquisicion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
 
                 <com.google.android.material.button.MaterialButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:id="@+id/btn_guardar"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="24dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="Guardar"
+                    app:icon="@drawable/ic_guardar"
+                    app:iconGravity="textStart"
+                    />
 
 
 

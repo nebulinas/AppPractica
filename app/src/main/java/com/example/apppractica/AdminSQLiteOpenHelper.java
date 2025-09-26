@@ -5,15 +5,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 3;
-//Hecho por Hab'il
+    private static final int DATABASE_VERSION = 4;
+
+    //Hecho por Hab'il
     public AdminSQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+
+
         //Yaxchel Xol
+
         db.execSQL("CREATE TABLE encargadoEquipo("+
                 "idencargado INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "nombre VARCHAR(50)" +
@@ -33,19 +38,25 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
                 "Foreign Key (idencargado) REFERENCES encargadoEquipo(idencargado)" +
                 ")");
 
-     //Tabla Inventario de Cámaras hecho por Yaxchel Xol
-        db.execSQL("CREATE TABLE inventarioActivosCamaras (" +
-                "idcamara INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "ActivoAlta VARCHAR(20),"+
-                "ActivoBaja VARCHAR(20), " +
-                "AgenciaInstalacion VARCHAR(20), " +
-                "areaInstalacion TEXT DEFAULT CURRENT_TIMESTAMP"+
-                ");"
-        );
+        db.execSQL("CREATE TABLE inventarioUtilitarios (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "activo VARCHAR(50)," +
+                "tipo VARCHAR(50)," +
+                "marca VARCHAR(50)," +
+                "modelo VARCHAR(50)," +
+                "serie VARCHAR(50)," +
+                "encargado VARCHAR(50)," +
+                "agencia VARCHAR(50)," +
+                "estado VARCHAR(50)," +
+                "fecha_registro TEXT," +
+                "fecha_adquisicion TEXT" +
+                ")");
+
 
 
 
     }
+
 
     @Override
     public SQLiteDatabase getReadableDatabase() {
@@ -57,8 +68,12 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            if (oldVersion < 2) {
-                db.execSQL("ALTER TABLE inventarioActivos ADD COLUMN fecha_cambio TEXT;");
-            }
+        if (oldVersion < 4) {
+            db.execSQL("ALTER TABLE inventarioActivos ADD COLUMN fecha_cambio TEXT;");
         }
     }
+
+
+
+
+}
