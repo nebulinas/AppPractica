@@ -77,6 +77,23 @@
             android:layout_marginBottom="12dp"
             android:gravity="center_vertical"/>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_agencia_camaras"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="Agencia"
+            app:helperText="obligatorio">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/agencia_camaras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_camara_alta"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -84,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:hint="No.Activo Cámara de Alta"
-        app:helperText="Requerido">
+        app:helperText="Requerido Mayúscula">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/activo_camara_alta"
@@ -93,6 +110,22 @@
             android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_camara_baja"
+            style="style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="No.Activo Cámara de Baja"
+            app:helperText="Requerido Mayúscula">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activo_camara_baja"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
 
@@ -105,12 +138,17 @@
             app:helperText="Obligatorio">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/area_instalacion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="textCapSentences" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
+
+
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/botn_guardar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

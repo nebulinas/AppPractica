@@ -29,18 +29,22 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
                 "antivirus TEXT ," +
                 "ip TEXT, "+
                 "activo VARCHAR(20)," +
-                "fecha_cambio TEXT, " +
+                "fecha_cambio TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
                 "Foreign Key (idencargado) REFERENCES encargadoEquipo(idencargado)" +
                 ")");
 
      //Tabla Inventario de Cámaras hecho por Yaxchel Xol
-        db.execSQL("CREATE TABLE inventarioActivosCámaras (" +
+        db.execSQL("CREATE TABLE inventarioActivosCamaras (" +
                 "idcamara INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "ActivoAlta VARCHAR(20),"+
-                "ActivoBaja VARCHAR(20), "+
+                "ActivoBaja VARCHAR(20), " +
+                "AgenciaInstalacion VARCHAR(20), " +
                 "areaInstalacion TEXT DEFAULT CURRENT_TIMESTAMP"+
                 ");"
         );
+
+
+
     }
 
     @Override

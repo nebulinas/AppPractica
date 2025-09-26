@@ -159,7 +159,7 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
             valuesEncargado.put(COLUMN_ENCARGADO_NOMBRE, encargado);
             idEncargado = db.insertOrThrow(TABLE_ENCARGADO, null, valuesEncargado);
             if (idEncargado == -1) {
-                throw new android.database.SQLException("Error al insertar en la tabla encargadoEquipo");
+                throw new android.database.SQLException("Error");
             }
 
             ContentValues values = new ContentValues();
@@ -183,7 +183,7 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
 
     } catch (Exception e) {
         Log.e("InventarioComputadoras", "Error al insertar en la base de datos", e);
-        Toast.makeText(this,"Error al guardar en la Base de datos:"+ e.getMessage(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Error al guardar:"+ e.getMessage(), Toast.LENGTH_LONG).show();
     } finally {
        if (db   != null)
         db.endTransaction();
