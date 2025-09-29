@@ -38,19 +38,6 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
                 "Foreign Key (idencargado) REFERENCES encargadoEquipo(idencargado)" +
                 ")");
 
-        db.execSQL("CREATE TABLE inventarioUtilitarios (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "activo VARCHAR(50)," +
-                "tipo VARCHAR(50)," +
-                "marca VARCHAR(50)," +
-                "modelo VARCHAR(50)," +
-                "serie VARCHAR(50)," +
-                "encargado VARCHAR(50)," +
-                "agencia VARCHAR(50)," +
-                "estado VARCHAR(50)," +
-                "fecha_registro TEXT," +
-                "fecha_adquisicion TEXT" +
-                ")");
 
 
 
