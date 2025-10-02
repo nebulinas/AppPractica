@@ -33,22 +33,22 @@
         android:fontFamily="@font/monserrat"
         android:textStyle="bold"/>
 
-
     <Space
         android:layout_width="match_parent"
         android:layout_height="48dp" />
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:layout_height="match_parent">
 
-
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="24dp"> <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_activos_computadoras"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                 <TextView
                     android:id="@+id/textView_computadoras"
                     android:layout_width="120dp"
-                    android:layout_height="28dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
                     android:text="Computadoras"
                     android:textAlignment="center"
@@ -83,85 +83,125 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="24dp" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="24dp" />
 
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_activos_utilitarios"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            android:layout_marginBottom="8dp"
-            android:clickable="true"
-            android:focusable="true">
-
-            <LinearLayout
-                android:layout_width="120dp"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_utilitarios"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:gravity="center_horizontal">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:focusable="true">
 
-                <ImageView
-                    android:id="@+id/activos_camaras"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/camara"
-                    android:contentDescription="Menú utilitarios"/>
-
-                <TextView
-                    android:id="@+id/textView_camaras"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Utilitarios"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                    android:textAlignment="center"/>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:gravity="center_horizontal">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="24dp" />
+                    <ImageView
+                        android:id="@+id/activos_camaras"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/utilitario2"
+                        android:contentDescription="Menú Cámaras"/>
 
+                    <TextView
+                        android:id="@+id/textView_camaras"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Utilitarios"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_historial_mantenimiento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            android:clickable="true"
-            android:focusable="true">
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="24dp" />
 
-            <LinearLayout
-                android:layout_width="120dp"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_historial_mantenimiento"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:gravity="center_horizontal">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:focusable="true">
 
-                <ImageView
-                    android:id="@+id/historial_mantenimiento"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/historial3"
-                    android:contentDescription="Historial de Mantenimiento"/>
-
-                <TextView
-                    android:id="@+id/textView_historial"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Historial"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                    android:textAlignment="center"/>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:gravity="center_horizontal">
 
-    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/historial_mantenimiento"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/historial3"
+                        android:contentDescription="Historial de Mantenimiento"/>
+
+                    <TextView
+                        android:id="@+id/textView_historial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Historial"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="24dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_consulta_equipos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:id="@+id/consulta_equipos_icon"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/buscar"
+                        app:tint="#3F51B5"
+                        android:contentDescription="Consulta de Equipos"
+                        tools:ignore="UseAppTint" />
+
+                    <TextView
+                        android:id="@+id/textView_consulta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Consultar Activos"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

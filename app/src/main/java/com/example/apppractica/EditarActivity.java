@@ -4,363 +4,325 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 public class EditarActivity extends AppCompatActivity {
-    //Echo por Herielis
-    // Variables para la UI
 
-    private TextInputEditText buscarEquipo, nombreEquipo, encargado, numeroActivo,
-            versionAntivirus, direccionIp;
-    private AutoCompleteTextView versionWindows, memoriaRam;
-    private MaterialButton botonBuscar, botonCancelar, botonGuardarCambios;
-    private MaterialCardView botonRegresar;
-    private ImageView imgRegresar;
-    private TextView textoUltimaModificacion, textoModificadoPor;
+    // Campos de búsqueda y edición
 
-    // Variables para la base de datos
+    private static final String DATABASE_NAME="inventarioActivos.db";
+    private static final int DATABASE_VERSION= 6;
+
+    private TextInputEditText buscarEquipo, nombreEquipo, encargado, numeroActivo, antivirus, ip;
+    private AutoCompleteTextView agencia, windows, ram;
+
+    // Botones
+    private MaterialButton btnBuscar, btnGuardar, btnCancelar;
+
+    // Base de datos
     private AdminSQLiteOpenHelper adminSQLiteOpenHelper;
-    private SQLiteDatabase bd;
-    private String equipoActualId = "";
-
-    private static final String DATABASE_NAME = "inventarioActivos.db";
-    private static final int DATABASE_VERSION = 3;
-    private static final String TABLE_INVENTARIO= "inventarioActivos";
-    public static final String COLUMN_AGENCIA = "agencia";
-    public static final String COLUMN_EQUIPO = "equipo";
-    public static final String COLUMN_IDENCARGADO = "idencargado";
-    public static final String COLUMN_WINDOWS = "windows";
-    public static final String COLUMN_RAM = "ram";
-    public static final String COLUMN_ANTIVIRUS = "antivirus";
-    public static final String COLUMN_IP = "ip";
-    public static final String COLUMN_ACTIVO = "activo";
-
-    public static final String TABLE_ENCARGADO = "encargadoEquipo"; //conectarlo con la tabla encargadoEquipo
-    public static final String COLUMN_ENCARGADO_NOMBRE = "nombre";
+    private String equipoId = "";
+    private long idAgenciaSeleccionada = -1;
 
 
-    // Arrays para los dropdowns
-    private String[] versionesWindows = {"Windows 10", "Windows 11", "Windows Server 2019",
-            "Windows Server 2022", "Otro"};
-    private String[] opcionesRam = {"4 GB", "8 GB", "16 GB", "32 GB", "64 GB", "Otro"};
+    private ArrayList<String> listaNombresAgencias;
+    private ArrayAdapter<String> adapterAgencias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.editar);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-        // Inicializar componentes
-        inicializarComponentes();
-        configurarDropdowns();
-        configurarEventos();
-
         // Inicializar base de datos
-        adminSQLiteOpenHelper = new AdminSQLiteOpenHelper(
-                this, "inventarioActivos.db",
-                null, DATABASE_VERSION);
+        adminSQLiteOpenHelper = new AdminSQLiteOpenHelper(this, "inventarioActivos.db", null, 6);
+
+        // Conectar variables con layout
+        conectarVistas();
+
+        // Configurar dropdowns
+        configurarListas();
+
+        // Configurar botones
+        configurarBotones();
+
+
     }
 
-    private void inicializarComponentes() {
-        // Campo de texto
+    private void conectarVistas() {
+        // Campos de búsqueda
         buscarEquipo = findViewById(R.id.buscar_equipo);
+
+        // Campos de edición
         nombreEquipo = findViewById(R.id.nombre_equipo);
         encargado = findViewById(R.id.encargado);
         numeroActivo = findViewById(R.id.numero_activo);
-        versionAntivirus = findViewById(R.id.version_antivirus);
-        direccionIp = findViewById(R.id.direccion_ip);
+        antivirus = findViewById(R.id.version_antivirus);
+        ip = findViewById(R.id.direccion_ip);
 
         // Dropdowns
-        versionWindows = findViewById(R.id.version_windows);
-        memoriaRam = findViewById(R.id.memoria_ram);
+        agencia = findViewById(R.id.agencia_editar);
+        windows = findViewById(R.id.version_windows);
+        ram = findViewById(R.id.memoria_ram);
 
         // Botones
-        botonBuscar = findViewById(R.id.boton_buscar);
-        botonCancelar = findViewById(R.id.boton_cancelar);
-        botonGuardarCambios = findViewById(R.id.boton_guardar);
-        botonRegresar = findViewById(R.id.card_boton_regresar);
-        imgRegresar = findViewById(R.id.boton_regresar);
-
-
-        textoUltimaModificacion = findViewById(R.id.texto_ultima_modificacion);
-        textoModificadoPor = findViewById(R.id.texto_modificado_por);
-
-        // Inicialmente deshabilitar los campos de edición
-        habilitarCamposEdicion(false);
+        btnBuscar = findViewById(R.id.boton_buscar);
+        btnGuardar = findViewById(R.id.boton_guardar);
+        btnCancelar = findViewById(R.id.boton_cancelar);
     }
 
-    private void configurarDropdowns() {
-        // Configuracion para adaptar versiones de Windows
+    private void configurarListas() {
+        // Lista de agencias
+        cargarAgencias();
+
+        agencia.setOnItemClickListener((parent, view, position, id) -> {
+                    String agenciaSeleccionada = (String) parent.getItemAtPosition(position);
+
+                    if (agenciaSeleccionada != null) {
+                        idAgenciaSeleccionada = AgenciaHelper.obtenerIdAgencia(adminSQLiteOpenHelper, agenciaSeleccionada);
+                    } else {
+                        idAgenciaSeleccionada = -1;
+                    }
+                });
+
+
+
+        // Lista de Windows
+        String[] windowsList = {"Windows 10 Pro", "Windows 11 Pro", "Windows 10 Home", "Windows 11 Home"};
         ArrayAdapter<String> adapterWindows = new ArrayAdapter<>(this,
-                android.R.layout.simple_dropdown_item_1line, versionesWindows);
-        versionWindows.setAdapter(adapterWindows);
+                android.R.layout.simple_dropdown_item_1line, windowsList);
+        windows.setAdapter(adapterWindows);
 
-        // Configuracion  para adapter memoria RAM
+        // Lista de RAM
+        String[] ramList = {"2 GB", "4 GB", "8 GB", "16 GB", "32 GB", "64 GB"};
         ArrayAdapter<String> adapterRam = new ArrayAdapter<>(this,
-                android.R.layout.simple_dropdown_item_1line, opcionesRam);
-        memoriaRam.setAdapter(adapterRam);
+                android.R.layout.simple_dropdown_item_1line, ramList);
+        ram.setAdapter(adapterRam);
     }
 
-    private void configurarEventos() {
-        // Botón de búsqueda
-        botonBuscar.setOnClickListener(v -> buscarEquipo());
+    private void cargarAgencias() {
+        ArrayList<String> agenciasList = AgenciaHelper.obtenerAgencias(adminSQLiteOpenHelper);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, agenciasList);
+        agencia.setAdapter(adapter);
+    }
 
-        // Botón de regresar
-        botonRegresar.setOnClickListener(v -> finish());
-        imgRegresar.setOnClickListener(v -> finish());
+    private void configurarBotones() {
+        // Botón Buscar
+        btnBuscar.setOnClickListener(v -> buscarEquipo());
 
-        // Botón de cancelar
-        botonCancelar.setOnClickListener(v -> {
-            limpiarCampos();
-            habilitarCamposEdicion(false);
-            equipoActualId = "";
-            Toast.makeText(this, "Edición cancelada", Toast.LENGTH_SHORT).show();
-        });
+        // Botón Guardar
+        btnGuardar.setOnClickListener(v -> guardarCambios());
 
-        // Botón de guardar cambios
-        botonGuardarCambios.setOnClickListener(v -> guardarCambios());
+        // Botón Cancelar
+        btnCancelar.setOnClickListener(v -> limpiarFormulario());
+
+        // Botón Regresar
+        findViewById(R.id.card_boton_regresar).setOnClickListener(v -> finish());
+        findViewById(R.id.boton_regresar).setOnClickListener(v -> finish());
     }
 
     private void buscarEquipo() {
-        String terminoBusqueda = buscarEquipo.getText().toString().trim();
-        Log.d("BUSQUEDA", "Termino a buscar: " + terminoBusqueda + "");
+        String busqueda = buscarEquipo.getText().toString().trim();
 
-        if (terminoBusqueda.isEmpty()) {
-            Toast.makeText(this, "Por favor ingrese un término de búsqueda", Toast.LENGTH_SHORT).show();
+        if (busqueda.isEmpty()) {
+            Toast.makeText(this, "Ingrese nombre o número de activo", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        bd = adminSQLiteOpenHelper.getReadableDatabase();
-
-        // Este es para buscar por nombre del equipo o número de activo
-        // Cambio hecho por yaxchel xol
-        String query = "SELECT " +
-                "i.id, i.equipo, i.idencargado, i.windows, i.ram, i.antivirus, i.ip, i.activo, " +
-                "e.nombre AS nombre_encargado " +
-                "FROM inventarioActivos i " +
-                "INNER JOIN encargadoEquipo e ON i.idencargado = e.idencargado " +
-                "WHERE LOWER(i.equipo) LIKE LOWER(?) OR LOWER(i.activo) LIKE LOWER(?)";
-
-        Cursor cursor = bd.rawQuery(query, new String[]{"%" + terminoBusqueda + "%", "%" + terminoBusqueda + "%"});
+        SQLiteDatabase db = adminSQLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT i.*, e.nombre as encargado_nombre, a.nombre_agencia " +
+                        "FROM inventarioActivos i " +
+                        "LEFT JOIN encargadoEquipo e ON i.idencargado = e.idencargado " +
+                        "LEFT JOIN tbAgencias a ON i.id_agencia = a.id_agencia " +
+                        "WHERE i.equipo LIKE ? OR i.activo LIKE ?",
+                new String[]{"%" + busqueda + "%", "%" + busqueda + "%"}
+        );
 
         if (cursor.moveToFirst()) {
-            // Este es para cuando encontro equipo para cargar datos
-            cargarDatosEquipo(cursor);
-            habilitarCamposEdicion(true);
+            // Llenar formulario con datos encontrados
+            llenarFormulario(cursor);
+            habilitarEdicion(true);
             Toast.makeText(this, "Equipo encontrado", Toast.LENGTH_SHORT).show();
         } else {
-            // No encontro el equipo
-            limpiarCampos();
-            habilitarCamposEdicion(false);
-            Toast.makeText(this, "No se encontró el equipo", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Equipo no encontrado", Toast.LENGTH_LONG).show();
         }
 
         cursor.close();
-        bd.close();
+        db.close();
     }
 
-    private void cargarDatosEquipo(Cursor cursor) {
-        // Guardar el ID del equipo actual
-        equipoActualId = cursor.getString(cursor.getColumnIndexOrThrow("id"));
+    private void llenarFormulario(Cursor cursor) {
+        equipoId = cursor.getString(cursor.getColumnIndexOrThrow("id"));
 
-        // Cargar los datos en los campos
         nombreEquipo.setText(cursor.getString(cursor.getColumnIndexOrThrow("equipo")));
-        encargado.setText(cursor.getString(cursor.getColumnIndexOrThrow("nombre_encargado")));
+        encargado.setText(cursor.getString(cursor.getColumnIndexOrThrow("encargado_nombre")));
         numeroActivo.setText(cursor.getString(cursor.getColumnIndexOrThrow("activo")));
-        versionWindows.setText(cursor.getString(cursor.getColumnIndexOrThrow("windows")), false);
-        memoriaRam.setText(cursor.getString(cursor.getColumnIndexOrThrow("ram")), false);
-        versionAntivirus.setText(cursor.getString(cursor.getColumnIndexOrThrow("antivirus")));
-        direccionIp.setText(cursor.getString(cursor.getColumnIndexOrThrow("ip")));
 
-        // Actualizar información de modificación
-        actualizarInfoModificacion();
+        String nombreAgencia = cursor.getString(cursor.getColumnIndexOrThrow("nombre_agencia"));
+        agencia.setText(nombreAgencia, false);
+        idAgenciaSeleccionada = cursor.getLong(cursor.getColumnIndexOrThrow("id_agencia"));
+
+        windows.setText(cursor.getString(cursor.getColumnIndexOrThrow("windows")), false);
+        ram.setText(cursor.getString(cursor.getColumnIndexOrThrow("ram")), false);
+        antivirus.setText(cursor.getString(cursor.getColumnIndexOrThrow("antivirus")));
+        ip.setText(cursor.getString(cursor.getColumnIndexOrThrow("ip")));
     }
 
     private void guardarCambios() {
-        if (equipoActualId.isEmpty()) {
-            Toast.makeText(this, "Primero debe buscar un equipo para editar", Toast.LENGTH_SHORT).show();
+        if (equipoId.isEmpty()) {
+            Toast.makeText(this, "Primero busque un equipo", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Validar campos requeridos
-        if (!validarCampos()) {
+        if (!validarDatos()) {
             return;
         }
-//Cambio hecho por yaxchel
-        bd = adminSQLiteOpenHelper.getWritableDatabase();
-        bd.beginTransaction();
+
+        if (idAgenciaSeleccionada == -1) {
+            agencia.setError("Seleccione una agencia");
+            agencia.requestFocus();
+            return;
+        }
+
+        SQLiteDatabase db = adminSQLiteOpenHelper.getWritableDatabase();
 
         try {
-            String nuevoEncargadoNombre = encargado.getText().toString().trim();
-            long idEncargado;
+            // 1. Guardar o obtener ID del encargado
+            String nombreEncargado = encargado.getText().toString().trim();
+            long idEncargado = obtenerIdEncargado(db, nombreEncargado);
 
-            Cursor cursorEncargado = null;
-            try {
-                cursorEncargado = bd.rawQuery("SELECT idencargado FROM encargadoEquipo WHERE nombre = ?", new String[]{nuevoEncargadoNombre});
+            // 2. Obtener ID de la agencia
 
-                if (cursorEncargado.moveToFirst()) {
-                    idEncargado = cursorEncargado.getLong(cursorEncargado.getColumnIndexOrThrow(COLUMN_IDENCARGADO));
-                } else {
-                    // Por si el encargado no existe
-                    ContentValues valuesEncargado = new ContentValues();
-                    valuesEncargado.put("nombre", nuevoEncargadoNombre);
-                    idEncargado = bd.insert("encargadoEquipo", null, valuesEncargado);
-                }
-            } finally {
-                if (cursorEncargado != null) {
-                    cursorEncargado.close();
-                }
+
+            // 3. Actualizar equipo
+            ContentValues datos = new ContentValues();
+            datos.put("equipo", nombreEquipo.getText().toString().trim());
+            datos.put("idencargado", idEncargado);
+            datos.put("id_agencia", idAgenciaSeleccionada);
+            datos.put("windows", windows.getText().toString());
+            datos.put("ram", ram.getText().toString());
+            datos.put("antivirus", antivirus.getText().toString().trim());
+            datos.put("ip", ip.getText().toString().trim());
+            datos.put("fecha_cambio", obtenerFechaActual());
+
+            int resultado = db.update("inventarioActivos", datos, "id=?", new String[]{equipoId});
+
+            if (resultado > 0) {
+                Toast.makeText(this, "Cambios guardados", Toast.LENGTH_SHORT).show();
+                limpiarFormulario();
+            } else {
+                Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show();
             }
-
-            if (idEncargado == -1) {
-                throw new Exception("No se pudo encontrar al encargado");
-            }
-
-        ContentValues registro = new ContentValues();
-        registro.put("equipo", nombreEquipo.getText().toString().trim());
-        registro.put(COLUMN_IDENCARGADO, idEncargado);
-        registro.put("windows", versionWindows.getText().toString());
-        registro.put("ram", memoriaRam.getText().toString());
-        registro.put("antivirus", versionAntivirus.getText().toString().trim());
-        registro.put("ip", direccionIp.getText().toString().trim());
-
-        int filasAfectadas = bd.update("inventarioActivos", registro, "id=?", new String[]{equipoActualId});
-
-        if (filasAfectadas > 0) {
-            bd.setTransactionSuccessful();
-            Toast.makeText(this, "Equipo actualizado exitosamente", Toast.LENGTH_SHORT).show();
-            actualizarInfoModificacion();
-            limpiarCampos();
-            habilitarCamposEdicion(false);
-            equipoActualId = "";
-        } else {
-            Toast.makeText(this, "Error al actualizar el equipo", Toast.LENGTH_SHORT).show();
-        }
 
         } catch (Exception e) {
-            Log.e("EditarActivity", "Error al actualizar el equipo", e);
-            Toast.makeText(this, "Error al actualizar el equipo: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
-            bd.endTransaction(); //Termina la transacción.
-            bd.close();
+            db.close();
         }
     }
 
-    private boolean validarCampos() {
-        // Validar nombre del equipo
+    private long obtenerIdEncargado(SQLiteDatabase db, String nombre) {
+        // Buscar si ya existe
+        Cursor cursor = db.rawQuery("SELECT idencargado FROM encargadoEquipo WHERE nombre=?",
+                new String[]{nombre});
+
+        if (cursor.moveToFirst()) {
+            long id = cursor.getLong(0);
+            cursor.close();
+            return id;
+        }
+        cursor.close();
+
+        // Si no existe, crear nuevo
+        ContentValues values = new ContentValues();
+        values.put("nombre", nombre);
+        return db.insert("encargadoEquipo", null, values);
+    }
+
+    private long obtenerIdAgencia(SQLiteDatabase db, String nombre) {
+        return AgenciaHelper.obtenerIdAgencia(adminSQLiteOpenHelper, nombre);
+        }
+
+
+
+
+    private boolean validarDatos() {
         if (nombreEquipo.getText().toString().trim().isEmpty()) {
-            nombreEquipo.setError("Este campo es requerido");
-            nombreEquipo.requestFocus();
+            mostrarError(nombreEquipo, "Ingrese nombre del equipo");
             return false;
         }
 
-        // Validar encargado
         if (encargado.getText().toString().trim().isEmpty()) {
-            encargado.setError("Este campo es requerido");
-            encargado.requestFocus();
+            mostrarError(encargado, "Ingrese nombre del encargado");
             return false;
         }
 
-        // Validar formato de IP
-        String ip = direccionIp.getText().toString().trim();
-        if (!ip.isEmpty() && !esIPValida(ip)) {
-            direccionIp.setError("Formato de IP inválido");
-            direccionIp.requestFocus();
+        if (agencia.getText().toString().trim().isEmpty()) {
+            mostrarError(agencia, "Seleccione una agencia");
             return false;
         }
 
         return true;
     }
 
-    private boolean esIPValida(String ip) {
-        // Validación básica de formato IP
-        String[] partes = ip.split("\\.");
-        if (partes.length != 4) return false;
-
-        try {
-            for (String parte : partes) {
-                int numero = Integer.parseInt(parte);
-                if (numero < 0 || numero > 255) return false;
-            }
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+    private void mostrarError(AutoCompleteTextView campo, String mensaje) {
+        campo.setError(mensaje);
+        campo.requestFocus();
     }
 
-    private void habilitarCamposEdicion(boolean habilitar) {
+    private void mostrarError(TextInputEditText campo, String mensaje) {
+        campo.setError(mensaje);
+        campo.requestFocus();
+    }
+
+    private void habilitarEdicion(boolean habilitar) {
         nombreEquipo.setEnabled(habilitar);
         encargado.setEnabled(habilitar);
-        versionWindows.setEnabled(habilitar);
-        memoriaRam.setEnabled(habilitar);
-        versionAntivirus.setEnabled(habilitar);
-        direccionIp.setEnabled(habilitar);
-        botonGuardarCambios.setEnabled(habilitar);
-        botonCancelar.setEnabled(habilitar);
-
-        // Es para que el número de activo siempre permanesca deshabilitado
-        numeroActivo.setEnabled(false);
+        agencia.setEnabled(habilitar);
+        windows.setEnabled(habilitar);
+        ram.setEnabled(habilitar);
+        antivirus.setEnabled(habilitar);
+        ip.setEnabled(habilitar);
+        btnGuardar.setEnabled(habilitar);
+        btnCancelar.setEnabled(habilitar);
     }
 
-    private void limpiarCampos() {
+    private void limpiarFormulario() {
         buscarEquipo.setText("");
         nombreEquipo.setText("");
         encargado.setText("");
         numeroActivo.setText("");
-        versionWindows.setText("", false);
-        memoriaRam.setText("", false);
-        versionAntivirus.setText("");
-        direccionIp.setText("");
+        agencia.setText("");
+        windows.setText("");
+        ram.setText("");
+        antivirus.setText("");
+        ip.setText("");
 
         // Limpiar errores
         nombreEquipo.setError(null);
         encargado.setError(null);
-        direccionIp.setError(null);
+        agencia.setError(null);
 
-        // Resetear información de modificación
-        textoUltimaModificacion.setText("Último cambio: --/--/---- --:--");
-        textoModificadoPor.setText("Modificado por: ---");
+        equipoId = "";
+        idAgenciaSeleccionada = -1;
+        habilitarEdicion(false);
     }
 
-    private void actualizarInfoModificacion() {
-        // Obtener fecha y hora actual
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
-        String fechaHora = sdf.format(new Date());
-
-        textoUltimaModificacion.setText("Último cambio: " + fechaHora);
-        textoModificadoPor.setText("Modificado por: Usuario Actual"); // Aquí podrías usar el usuario actual del sistema
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (bd != null && bd.isOpen()) {
-            bd.close();
-        }
+    private String obtenerFechaActual() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        return sdf.format(new Date());
     }
 }

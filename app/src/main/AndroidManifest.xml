@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppPractica">
         <activity
+            android:name=".ConsultaActivos"
+            android:exported="false" />
+        <activity
             android:name=".UtilitariosActivity"
             android:exported="false" />
         <activity
@@ -23,7 +26,6 @@
         <activity
             android:name=".HistorialActivosActivity"
             android:exported="false" />
-
         <activity
             android:name=".MenuComputadoraActivity"
             android:exported="false" />

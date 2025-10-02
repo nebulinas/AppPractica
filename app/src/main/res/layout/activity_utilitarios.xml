@@ -176,15 +176,15 @@
                     android:id="@+id/layout_utagencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_marginBottom="12dp"
                     android:hint="Agencia">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <AutoCompleteTextView
                         android:id="@+id/agencia_utilitario"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text" />
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -220,11 +220,11 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_adquisicion"
+                    android:id="@+id/layout_fAdquisicion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
-                    android:hint="Fecha Adquisicion">
+                    android:hint="Fecha de Adquisición">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/fecha_adquisicion"
@@ -245,8 +245,7 @@
                     android:backgroundTint="#3F51B5"
                     android:text="Guardar"
                     app:icon="@drawable/ic_guardar"
-                    app:iconGravity="textStart"
-                    />
+                    app:iconGravity="textStart" />
 
 
 

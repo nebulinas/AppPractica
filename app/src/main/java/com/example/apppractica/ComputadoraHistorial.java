@@ -3,6 +3,7 @@ package com.example.apppractica;
 public class ComputadoraHistorial {
 
         private long id;
+        private String tipo;
         private String nombreEquipo;
         private String numeroActivo;
         private String agencia;
@@ -12,10 +13,17 @@ public class ComputadoraHistorial {
         private String antivirus;
         private String windows;
         private String fechaCambio;
+        private String marca;
+        private String modelo;
+        private String serie;
+        private String estado;
+        private String fechaAdquisicion;
+
 
         // Constructor
         public ComputadoraHistorial(long id, String nombreEquipo, String numeroActivo, String agencia, String encargado, String ip, String ram, String antivirus, String windows, String fechaCambio) {
             this.id = id;
+            this.tipo = "COMPUTADORA";
             this.nombreEquipo = nombreEquipo;
             this.numeroActivo = numeroActivo;
             this.agencia = agencia;
@@ -26,6 +34,31 @@ public class ComputadoraHistorial {
             this.windows = windows;
             this.fechaCambio = fechaCambio;
         }
+
+        public ComputadoraHistorial(long id, String activo, String tipoUtilitario, String marca,
+                                      String modelo, String serie, String agencia, String encargado, String estado,
+                                     String fechaRegistro, String fechaAdquisicion) {
+            this.id = id;
+            this.tipo = tipoUtilitario;
+            this.nombreEquipo = tipoUtilitario;
+            this.numeroActivo = activo;
+            this.agencia = agencia;
+            this.encargado = encargado;
+            this.marca = marca;
+            this.serie= serie;
+            this.estado = estado;
+            this.fechaAdquisicion = fechaAdquisicion;
+            this.fechaCambio = fechaRegistro;
+        }
+
+        public String getTipo() {
+            return tipo;
+        }
+
+
+
+
+
 
         // Getters
         public long getId() { return id; }
@@ -38,4 +71,14 @@ public class ComputadoraHistorial {
         public String getAntivirus() { return antivirus; }
         public String getWindows() { return windows; }
         public String getFechaCambio() { return fechaCambio; }
+
+        public String getModelo() { return tipo; }
+        public String getMarca() { return marca; }
+        public String getSerie() { return serie; }
+        public String getEstado() { return estado; }
+        public String getFechaAdquisicion() { return fechaAdquisicion; }
+
+
+
+
 }

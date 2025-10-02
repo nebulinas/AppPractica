@@ -16,6 +16,17 @@
         android:outlineSpotShadowColor="@color/cardview_light_background"
         android:padding="16dp">
 
+        <!-- ✅ NUEVO: Tipo (COMPUTADORA/UTILITARIO) -->
+        <TextView
+            android:id="@+id/tv_card_tipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo: COMPUTADORA"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginBottom="4dp" />
+
         <TextView
             android:id="@+id/tv_card_equipo_nombre"
             android:layout_width="wrap_content"
@@ -79,6 +90,7 @@
             android:textSize="14sp"
             android:textColor="?android:attr/textColorSecondaryInverse"
             android:layout_marginTop="4dp" />
+
         <TextView
             android:id="@+id/tv_card_antivirus"
             android:layout_width="wrap_content"
@@ -96,6 +108,63 @@
             android:textSize="14sp"
             android:textColor="?android:attr/textColorSecondaryInverse"
             android:layout_marginTop="4dp" />
+
+        <!-- ✅ CAMPOS ESPECÍFICOS PARA UTILITARIOS (inicialmente ocultos) -->
+
+        <!-- Marca (Utilitarios) -->
+        <TextView
+            android:id="@+id/tv_card_marca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Marca: HP"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:layout_marginTop="4dp"
+            android:visibility="gone" />
+
+        <!-- Modelo (Utilitarios) -->
+        <TextView
+            android:id="@+id/tv_card_modelo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modelo: LaserJet Pro"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:layout_marginTop="4dp"
+            android:visibility="gone" />
+
+        <!-- Serie (Utilitarios) -->
+        <TextView
+            android:id="@+id/tv_card_serie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Serie: SN123456"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:layout_marginTop="4dp"
+            android:visibility="gone" />
+
+        <!-- Estado (Utilitarios) -->
+        <TextView
+            android:id="@+id/tv_card_estado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estado: Activo"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:layout_marginTop="4dp"
+            android:visibility="gone" />
+
+        <!-- Fecha Adquisición (Utilitarios) -->
+        <TextView
+            android:id="@+id/tv_card_fecha_adquisicion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha Adquisición: 2023-12-01"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:layout_marginTop="4dp"
+            android:visibility="gone" />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

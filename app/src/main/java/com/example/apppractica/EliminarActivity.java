@@ -30,8 +30,8 @@ public class EliminarActivity extends AppCompatActivity {
     private ImageView imgRegresar;
 
     // Variables para la base de datos
-    private static final int DATABASE_VERSION = 3;
-    private AdminSQLiteOpenHelper admin;
+    private static final int DATABASE_VERSION = 6;
+    private AdminSQLiteOpenHelper dbHelper;
     private SQLiteDatabase bd;
     private String equipoActualId = "";
     private boolean equipoEncontrado = false;
@@ -53,7 +53,7 @@ public class EliminarActivity extends AppCompatActivity {
         configurarEventos();
 
         // Inicializar base de datos
-        admin = new AdminSQLiteOpenHelper(this, "inventarioActivos.db", null, DATABASE_VERSION);
+        dbHelper = new AdminSQLiteOpenHelper(this, "inventarioActivos.db", null, DATABASE_VERSION);
 
         // Inicialmente deshabilitar el botón de eliminar
         botonEliminar.setEnabled(false);
@@ -109,15 +109,17 @@ public class EliminarActivity extends AppCompatActivity {
             return;
         }
 
-        bd = admin.getReadableDatabase();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT i.id, i.equipo, e.nombre as encargado, i.windows, i.ram, " +
+                        "i.antivirus, i.ip, i.activo, a.nombre_agencia " +
+                        "FROM inventarioActivos i " +
+                        "LEFT JOIN encargadoEquipo e ON i.idencargado = e.idencargado " +
+                        "LEFT JOIN tbAgencias a ON i.id_agencia = a.id_agencia " +
+                        "WHERE i.equipo LIKE ? OR i.activo LIKE ?",
+                new String[]{"%" + terminoBusqueda + "%", "%" + terminoBusqueda + "%"}
+        );
 
-        // Es para poder buscar número de activo
-        String query = "SELECT i.id, i.equipo, e.nombre AS nombre_encargado, i.windows, i.ram, i.antivirus, i.ip, i.activo " +
-                "FROM inventarioActivos i " +
-                "LEFT JOIN encargadoEquipo e ON i.idencargado = e.idencargado " +
-                "WHERE i.equipo LIKE ? OR i.activo LIKE ?";
-
-        Cursor cursor = bd.rawQuery(query, new String[]{"%" + terminoBusqueda + "%", "%" + terminoBusqueda + "%"});
 
         if (cursor.moveToFirst()) {
             cargarDatosEquipo(cursor);
@@ -132,20 +134,24 @@ public class EliminarActivity extends AppCompatActivity {
         }
 
         cursor.close();
-        bd.close();
+
     }
 
     private void cargarDatosEquipo(Cursor cursor) {
         // Guardar el ID
         equipoActualId = cursor.getString(cursor.getColumnIndexOrThrow("id"));
 
-        nombreEquipoMostrar.setText(cursor.getString(cursor.getColumnIndexOrThrow("equipo")));
-        String nombreEncargado = cursor.getString(cursor.getColumnIndexOrThrow("nombre_encargado"));
-        if (nombreEncargado == null) {
-            encargadoMostrar.setText("No asignado");
-        } else {
-            encargadoMostrar.setText(nombreEncargado);
+        if (nombreEquipoMostrar != null) {
+            nombreEquipoMostrar.setText(cursor.getString(cursor.getColumnIndexOrThrow("equipo")));
         }
+        String encargadoCursor = cursor.getString(cursor.getColumnIndexOrThrow("encargado"));;
+        if (encargadoMostrar != null) {
+            if (encargadoCursor !=null && !encargadoCursor.trim().isEmpty()) {
+                encargadoMostrar.setText(encargadoCursor);
+        } else {
+            encargadoMostrar.setText("no asignado");
+        }
+            }
         windowsMostrar.setText(cursor.getString(cursor.getColumnIndexOrThrow("windows")));
         ramMostrar.setText(cursor.getString(cursor.getColumnIndexOrThrow("ram")));
         antivirusMostrar.setText(cursor.getString(cursor.getColumnIndexOrThrow("antivirus")));
@@ -162,30 +168,24 @@ public class EliminarActivity extends AppCompatActivity {
         String nombreEquipo = nombreEquipoMostrar.getText().toString();
         String numeroActivo = activoMostrar.getText().toString();
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("⚠️ Confirmar Eliminación");
-        builder.setMessage("¿Está seguro de que desea eliminar permanentemente el siguiente equipo?\n\n" +
-                "Nombre: " + nombreEquipo + "\n" +
-                "Número de Activo: " + numeroActivo + "\n\n" +
-                "Esta acción NO SE PUEDE DESHACER.");
 
-        builder.setPositiveButton("Eliminar", (dialog, which) -> {
-            eliminarEquipo();
-        });
 
-        builder.setNegativeButton("Cancelar", (dialog, which) -> {
-            dialog.dismiss();
-        });
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        new AlertDialog.Builder(this)
+                .setTitle("⚠️ Confirmar Eliminación")
+                .setMessage("¿Está seguro de eliminar permanentemente?\n\n" +
+                        "Equipo: " + nombreEquipo + "\n" +
+                        "Activo: " + numeroActivo + "\n\n" +
+                        "Esta acción NO se puede deshacer.")
+                .setPositiveButton("Eliminar", (dialog, which) -> eliminarEquipo())
+                .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
+                .show();
 
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(android.R.color.holo_red_dark));
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(android.R.color.darker_gray));
+
     }
 
     private void eliminarEquipo() {
-        bd = admin.getWritableDatabase();
+        bd = dbHelper.getWritableDatabase();
 
         try {
             int filasEliminadas = bd.delete("inventarioActivos", "id=?", new String[]{equipoActualId});
