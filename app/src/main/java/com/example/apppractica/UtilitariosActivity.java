@@ -60,6 +60,7 @@ public class UtilitariosActivity extends AppCompatActivity {
 
         private void inicializarVistas() {
 
+
             // Inicializar vistas
             activo = findViewById(R.id.activo_utilitario);
             tipo = findViewById(R.id.tipo_utilitario);
@@ -150,7 +151,6 @@ public class UtilitariosActivity extends AppCompatActivity {
         String sModelo = modelo.getText().toString().trim();
         String sSerie = serie.getText().toString().trim();
         String sEncargado = encargado.getText().toString().trim();
-        String sAgencia = agencia.getText().toString().trim();
         String sEstado = estado.getText().toString().trim();
         String sFechaRegistro = fechaRegistro.getText().toString().trim();
         String sFechaAdquisicion = fechaAdquisicion.getText().toString().trim();

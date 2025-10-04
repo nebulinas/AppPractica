@@ -13,6 +13,7 @@ public class ComputadoraHistorial {
         private String antivirus;
         private String windows;
         private String fechaCambio;
+        private String fechaRegistro;
         private String marca;
         private String modelo;
         private String serie;
@@ -44,9 +45,11 @@ public class ComputadoraHistorial {
             this.numeroActivo = activo;
             this.agencia = agencia;
             this.encargado = encargado;
+            this.modelo= modelo;
             this.marca = marca;
             this.serie= serie;
             this.estado = estado;
+            this.fechaRegistro = fechaRegistro;
             this.fechaAdquisicion = fechaAdquisicion;
             this.fechaCambio = fechaRegistro;
         }
@@ -72,10 +75,11 @@ public class ComputadoraHistorial {
         public String getWindows() { return windows; }
         public String getFechaCambio() { return fechaCambio; }
 
-        public String getModelo() { return tipo; }
+        public String getModelo() { return modelo; }
         public String getMarca() { return marca; }
         public String getSerie() { return serie; }
         public String getEstado() { return estado; }
+        public String getFechaRegistro() { return fechaRegistro; }
         public String getFechaAdquisicion() { return fechaAdquisicion; }
 
 

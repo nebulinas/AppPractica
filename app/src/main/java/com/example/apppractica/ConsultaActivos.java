@@ -11,14 +11,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textview.MaterialTextView;
+
 
 public class ConsultaActivos extends AppCompatActivity {
 
     private TextInputEditText editTextBusqueda;
     private MaterialButton botonBuscar;
     private TextView textoResultado;
+    private MaterialCardView cardBotonRegresar;
     private AdminSQLiteOpenHelper adminDbHelper;
 
     @SuppressLint("MissingInflatedId")
@@ -30,9 +32,15 @@ public class ConsultaActivos extends AppCompatActivity {
         adminDbHelper = new AdminSQLiteOpenHelper(this, "inventarioActivos.db", null, 6);
 
         editTextBusqueda = findViewById(R.id.busqueda_activos);
+
+
         botonBuscar = findViewById(R.id.boton_buscar);
+        cardBotonRegresar = findViewById(R.id.card_boton_regresar);
 
 
+        if (cardBotonRegresar != null) {
+            cardBotonRegresar.setOnClickListener(v -> finish());
+        }
 
 
         textoResultado = findViewById(R.id.texto_resultado);
@@ -46,7 +54,11 @@ public class ConsultaActivos extends AppCompatActivity {
             }
             return false;
         });
+
     }
+
+
+
 
     private void realizarBusqueda() {
         String textoBusqueda = editTextBusqueda.getText().toString().trim();
@@ -58,7 +70,6 @@ public class ConsultaActivos extends AppCompatActivity {
 
         StringBuilder resultado = new StringBuilder();
         SQLiteDatabase db = adminDbHelper.getReadableDatabase();
-
         try {
             // Verificar si es búsqueda por encargado
             if (esEncargado(db, textoBusqueda)) {
@@ -81,6 +92,7 @@ public class ConsultaActivos extends AppCompatActivity {
             db.close();
         }
     }
+
 
     private boolean esEncargado(SQLiteDatabase db, String busqueda) {
         Cursor cursor = db.rawQuery(
@@ -115,13 +127,13 @@ public class ConsultaActivos extends AppCompatActivity {
 
     private void buscarComputadoras(SQLiteDatabase db, String busqueda, StringBuilder resultado, boolean esPorEncargado) {
         String query = esPorEncargado ?
-                "SELECT i.equipo, i.activo, a.nombre_agencia, i.ip, i.windows, i.ram, i.antivirus " +
+                "SELECT i.equipo, i.activo, a.nombre_agencia, i.ip, i.windows, i.ram, i.antivirus, i.fecha_cambio " +
                         "FROM inventarioActivos i " +
                         "LEFT JOIN encargadoEquipo e ON i.idencargado = e.idencargado " +
                         "LEFT JOIN tbAgencias a ON i.id_agencia = a.id_agencia " +
                         "WHERE e.nombre = ? ORDER BY i.equipo" :
 
-                "SELECT i.equipo, i.activo, a.nombre_agencia, e.nombre, i.ip, i.windows, i.ram, i.antivirus " +
+                "SELECT i.equipo, i.activo, a.nombre_agencia, e.nombre, i.ip, i.windows, i.ram, i.antivirus, i.fecha_cambio " +
                         "FROM inventarioActivos i " +
                         "LEFT JOIN encargadoEquipo e ON i.idencargado = e.idencargado " +
                         "LEFT JOIN tbAgencias a ON i.id_agencia = a.id_agencia " +
@@ -143,6 +155,7 @@ public class ConsultaActivos extends AppCompatActivity {
                 resultado.append("  Windows: ").append(cursor.getString(4)).append("\n");
                 resultado.append("  RAM: ").append(cursor.getString(5)).append("\n");
                 resultado.append("  Antivirus: ").append(cursor.getString(6)).append("\n\n");
+                resultado.append("  Fecha Cambio: ").append(cursor.getString(7)).append("\n\n");
             } else {
                 resultado.append("COMPUTADORA #").append(count).append("\n");
                 resultado.append("• Equipo: ").append(cursor.getString(0)).append("\n");
@@ -153,6 +166,7 @@ public class ConsultaActivos extends AppCompatActivity {
                 resultado.append("• Windows: ").append(cursor.getString(5)).append("\n");
                 resultado.append("• RAM: ").append(cursor.getString(6)).append("\n");
                 resultado.append("• Antivirus: ").append(cursor.getString(7)).append("\n");
+                resultado.append("• Fecha Cambio: ").append(cursor.getString(8)).append("\n");
                 resultado.append("----------------------------\n\n");
             }
         }
@@ -168,13 +182,13 @@ public class ConsultaActivos extends AppCompatActivity {
 
     private void buscarUtilitarios(SQLiteDatabase db, String busqueda, StringBuilder resultado, boolean esPorEncargado) {
         String query = esPorEncargado ?
-                "SELECT u.tipo, u.activo, u.marca, u.modelo, u.serie, a.nombre_agencia, u.estado " +
+                "SELECT u.tipo, u.activo, u.marca, u.modelo, u.serie, a.nombre_agencia, u.estado, u.fecha_registro, u.fecha_adquisicion " +
                         "FROM inventarioUtilitarios u " +
                         "LEFT JOIN encargadoEquipo e ON u.idencargado = e.idencargado " +
                         "LEFT JOIN tbAgencias a ON u.id_agencia = a.id_agencia " +
                         "WHERE e.nombre = ? ORDER BY u.tipo" :
 
-                "SELECT u.tipo, u.activo, u.marca, u.modelo, u.serie, a.nombre_agencia, e.nombre, u.estado " +
+                "SELECT u.tipo, u.activo, u.marca, u.modelo, u.serie, a.nombre_agencia, e.nombre, u.estado, u.fecha_registro, u.fecha_adquisicion  " +
                         "FROM inventarioUtilitarios u " +
                         "LEFT JOIN encargadoEquipo e ON u.idencargado = e.idencargado " +
                         "LEFT JOIN tbAgencias a ON u.id_agencia = a.id_agencia " +
@@ -196,6 +210,8 @@ public class ConsultaActivos extends AppCompatActivity {
                 resultado.append("  Serie: ").append(cursor.getString(4)).append("\n");
                 resultado.append("  Agencia: ").append(cursor.getString(5)).append("\n");
                 resultado.append("  Estado: ").append(cursor.getString(6)).append("\n\n");
+                resultado.append("  Fecha Registro: ").append(cursor.getString(7)).append("\n");
+                resultado.append("  Fecha Adquisición: ").append(cursor.getString(8)).append("\n\n");
             } else {
                 resultado.append("UTILITARIO #").append(count).append("\n");
                 resultado.append("• Tipo: ").append(cursor.getString(0)).append("\n");
@@ -206,7 +222,8 @@ public class ConsultaActivos extends AppCompatActivity {
                 resultado.append("• Agencia: ").append(cursor.getString(5)).append("\n");
                 resultado.append("• Encargado: ").append(cursor.getString(6)).append("\n");
                 resultado.append("• Estado: ").append(cursor.getString(7)).append("\n");
-                resultado.append("----------------------------\n\n");
+                resultado.append("• Fecha Registro: ").append(cursor.getString(8)).append("\n");
+                resultado.append("• Fecha Adquisición: ").append(cursor.getString(9)).append("\n");
             }
         }
 
@@ -218,6 +235,10 @@ public class ConsultaActivos extends AppCompatActivity {
 
         cursor.close();
     }
+
+
+
+
 
     @Override
     protected void onDestroy() {

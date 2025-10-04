@@ -104,10 +104,20 @@
             android:id="@+id/tv_card_fecha_cambio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha cambio: 2023-09-15"
+            android:text="Fecha cambio:"
             android:textSize="14sp"
             android:textColor="?android:attr/textColorSecondaryInverse"
             android:layout_marginTop="4dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone"
+            android:id="@+id/separatorUtilitarios" />
+
 
         <!-- ✅ CAMPOS ESPECÍFICOS PARA UTILITARIOS (inicialmente ocultos) -->
 
@@ -144,6 +154,8 @@
             android:layout_marginTop="4dp"
             android:visibility="gone" />
 
+
+
         <!-- Estado (Utilitarios) -->
         <TextView
             android:id="@+id/tv_card_estado"
@@ -165,6 +177,16 @@
             android:textColor="?android:attr/textColorSecondaryInverse"
             android:layout_marginTop="4dp"
             android:visibility="gone" />
+        <TextView
+            android:id="@+id/tv_card_fecha_registro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha Registro: 2023-12-01"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            android:layout_marginTop="4dp"
+            android:visibility="gone" />
+
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

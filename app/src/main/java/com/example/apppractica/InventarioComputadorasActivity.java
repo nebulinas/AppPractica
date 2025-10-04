@@ -29,7 +29,7 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
     private static final int DATABASE_VERSION = 6;
 
     private static final String TABLE_INVENTARIO= "inventarioActivos";
-    public static final String COLUMN_IA_ID_AGENCIA = "id_agencia";
+
     public static final String COLUMN_EQUIPO = "equipo";
     public static final String COLUMN_WINDOWS = "windows";
     public static final String COLUMN_IDENCARGADO = "idencargado";
@@ -41,9 +41,9 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
     public static final String TABLE_ENCARGADO = "encargadoEquipo";
     public static final String COLUMN_ENCARGADO_NOMBRE = "nombre";
 
-    public static final String TABLE_AGENCIAS = "tbAgencias";
+
     public static final String COLUMN_ID_AGENCIA = "id_agencia";
-    public static final String COLUMN_AGENCIA_NOMBRE = "nombre_agencia";
+
 
 
 
@@ -102,7 +102,7 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
                 String agenciaSeleccionada = (String) parent.getItemAtPosition(position);
                 if (agenciaSeleccionada != null) {
                     idAgenciaSeleccionada = AgenciaHelper.obtenerIdAgencia(adminSQLiteOpenHelper, agenciaSeleccionada);
-                        Log.d("AgenciaSeleccionada","ID:" + idAgenciaSeleccionada + "Nombre:" + agenciaSeleccionada);
+                    Log.d("AgenciaSeleccionada","ID:" + idAgenciaSeleccionada + "Nombre:" + agenciaSeleccionada);
                 } else {
                     idAgenciaSeleccionada = -1;
                 }
@@ -165,7 +165,6 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
         }
 
 
-
         if (encargado.isEmpty()) {
             etNombreEncargado.setError("Este campo es requerido");
             etNombreEncargado.requestFocus();
@@ -208,9 +207,8 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
             }
 
 
-
             ContentValues values = new ContentValues();
-            values.put(COLUMN_ID_AGENCIA,idAgenciaSeleccionada);
+            values.put(COLUMN_ID_AGENCIA, idAgenciaSeleccionada);
             values.put(COLUMN_EQUIPO, equipo);
             values.put(COLUMN_IDENCARGADO, idEncargado);
             values.put(COLUMN_WINDOWS, windows);
@@ -233,7 +231,6 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
         } finally {
             if (db != null) {
                 db.endTransaction();
-                db.close();
             }
         }
 
@@ -241,15 +238,10 @@ public class InventarioComputadorasActivity extends AppCompatActivity {
             Toast.makeText(this, "Registro guardado con éxito", Toast.LENGTH_SHORT).show();
             limpiarCampos();
             etNombreAgencia.requestFocus();
-        } else {
-            Toast.makeText(this, "Error al guardar el registro", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private
-
-
-        void limpiarCampos() {
+    private void limpiarCampos() {
 
             idAgenciaSeleccionada = -1;
         etNombreAgencia.setText("", false);

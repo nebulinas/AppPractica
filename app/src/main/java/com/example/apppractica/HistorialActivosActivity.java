@@ -113,7 +113,7 @@ public class HistorialActivosActivity extends AppCompatActivity {
         if (listaHistorial.isEmpty()) {
             Toast.makeText(this, "No hay activos registrados.", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Cargados." + listaHistorial.size() + "registros", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cargados " + listaHistorial.size() + " registros", Toast.LENGTH_SHORT).show();
         }
     }
 
